@@ -18,7 +18,6 @@
   ns.datize = function(date_str){
     date_str = date_str.trim()
       .replace(/^(\d+)\/(\d+)\/(\d+)$/, '$3-$2-$1');
-    console.log(date_str);
     return new Date(date_str);
   };
 
@@ -79,9 +78,18 @@
   };
 
   ns.displayMP = function(){
-    var sexe = 'Député' + (ns.dep.sexe === 'F' ? 'e' : '');
-    $('#name').text(ns.dep.nom);
-    $('#descr').text(sexe + ' de TODO ' + ns.dep.nom_circo);
+    var sexe = 'Député' + (ns.dep.sexe === 'F' ? 'e' : ''),
+      twitter = (ns.dep.twitter ? '@' + ns.dep.twitter : ''),
+      plural = (ns.dep.nb_mandats > 2 ? 's' : ''),
+      extra_mandats = '<h2>A' + (ns.dep.nb_mandats > 1 ? '' : 'ucun a') + 'utre' + plural + ' mandat' + plural + (ns.dep.nb_mandats > 1 ? ' :</h2><ul>' : '</h2>');
+
+    ns.dep.autres_mandats.forEach(function(m){
+      m = m["mandat"].split(' / ');
+      var fonction = (/^(pr[eé]sid|maire)/i.test(m[2]) ? '<b>' + m[2] + '</b>' :  m[2]);
+      extra_mandats += '<li>' + m[0] + ' &mdash; ' + m[1] + ' (' + fonction + ')</li>';
+    });
+    if (ns.dep.nb_mandats > 1) extra_mandats += '</ul>'
+
     if (!ns.dep.debut_mandat) {
       ns.dep.debut_mandat = ns.datize(ns.dep.mandat_debut);
       ns.dep.anciens_mandats.filter(function(a){
@@ -100,20 +108,19 @@
           ns.dep.debut_mandat = a[0];
       });
     }
-    $('#details').html(ns.annees(ns.dep.date_naissance) + ' - ' + sexe.toLowerCase() + ' depuis ' + ns.annees(ns.dep.debut_mandat) + '<br>' + ns.dep.profession.replace('declare', 'déclaré'));
-    var twitter = (ns.dep.twitter ? '@' + ns.dep.twitter : ''),
-      plural = (ns.dep.nb_mandats > 2 ? 's' : ''),
-      extra_mandats = (ns.dep.nb_mandats > 1 ? (ns.dep.nb_mandats - 1) + ' autre' + plural + ' mandat' + plural : ''),
-      extra = twitter + (twitter !== '' && extra_mandats !== '' ? ' - ' : '') + extra_mandats;
-    $('#extra').html(extra);
-    $('#logo img').attr('src', 'logos/AN/' + ns.dep.groupe_sigle.toUpperCase() + '.png');
 
-    $('#widget').attr('src', 'http://www.nosdeputes.fr/widget14/' + ns.dep.slug + '?iframe=true&width=800');
+    $('#name').text(ns.dep.nom);
+    $('#descr').text(sexe + ' de TODO ' + ns.dep.nom_circo);
+    $('#details').html(ns.annees(ns.dep.date_naissance) + ' - ' + sexe.toLowerCase() + ' depuis ' + ns.annees(ns.dep.debut_mandat) + '<br>' + ns.dep.profession.replace('declare', 'déclaré'));
+    $('#extra').html(twitter);
+    $('#logo img').attr('src', 'logos/AN/' + ns.dep.groupe_sigle.toUpperCase() + '.png');
+    $('#widget').attr('src', 'http://www.nosdeputes.fr/widget14/' + ns.dep.slug + '?iframe=true&width=950');
+    $('#autres').html(extra_mandats);
   };
 
   ns.setResponsive = function(){
     $('#right').width($(window).width() - $('#incrust').width() - $('#right').css('padding-left').replace('px', '') - 1);
-    $('#bottom').height($(window).height() - $('#top').height() - 1);
+    $('#autres').height($(window).height() - $('#top').height() - 1);
   };
 
   $(document).ready(function(){

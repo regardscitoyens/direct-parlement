@@ -48,23 +48,14 @@ body{
 #logo img{
   width: 100px;
   height: 100px;
-  bprder: solid 1px white;
+  border: solid 1px #333;
   border-radius: 33%;
-}
-#bottom{
-  width: 100%;
-}
-#widget{
-  padding-top: 10px;
-  float: left;
-  width: 800px;
-  min-height: 300px;
-  overflow: auto;
 }
 h1{
   font-size: 24px;
 }
 h2{
+  font-size: 18px;
   text-align: left;
   margin-left: 15px;
 }
@@ -84,4 +75,19 @@ h2{
 }
 #deputes{
   width: 250px;
+}
+#bottom{
+  width: 100%;
+}
+#widget{
+  padding-top: 10px;
+  padding-left: 25px;
+  float: left;
+  width: 1000px;
+  min-height: 300px;
+  overflow: auto;
+}
+#autres{
+  float: left;
+  text-align: left;
 }
