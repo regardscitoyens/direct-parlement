@@ -108,11 +108,12 @@
     $('#extra').html(extra);
     $('#logo img').attr('src', 'logos/AN/' + ns.dep.groupe_sigle.toUpperCase() + '.png');
 
-    $('#widget').attr('src', 'http://www.nosdeputes.fr/widget14/' + ns.dep.slug + '?iframe=true&width=640');
+    $('#widget').attr('src', 'http://www.nosdeputes.fr/widget14/' + ns.dep.slug + '?iframe=true&width=800');
   };
 
   ns.setResponsive = function(){
-    $('#right').width($(window).width() - $('#left').width() - $('#right').css('padding-left').replace('px', ''));
+    $('#right').width($(window).width() - $('#incrust').width() - $('#right').css('padding-left').replace('px', '') - 1);
+    $('#bottom').height($(window).height() - $('#top').height() - 1);
   };
 
   $(document).ready(function(){
