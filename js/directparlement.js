@@ -1,3 +1,8 @@
+/* TODO
+ - handle contexte feuille jaune + links amds?
+ - improve logos
+ - ministres ?
+*/
 (function (ns){
 
   ns.accentMap = {
