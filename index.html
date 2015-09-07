@@ -27,14 +27,22 @@
         <h1>Direct Parlement <small>par <a href="http://www.RegardsCitoyens.org">Regards Citoyens</a></small></h1>
       </div>
       <p id="loader">Chargement...</p>
-      <div id="content" style="display: none">
+      <div id="content">
         <div id="menu" class="ui-widget">
           <label for="listdeputes">Député : </label>
           <input id="listdeputes">
         </div>
+        <button id="random" onClick="directparl.randomMP()">Au hasard</button>
+        <div id="FJ">
+          <p id="loaderFJ">Chargement...</p>
+          <div id="FJloaded">
+            <button id="linkFJ" onClick="window.open('http://www.assemblee-nationale.fr/14/seance/feuille-jaune.pdf?refresh=true', '_blank')" title="Télécharger la feuille jaune">Télécharger</button>
+            <button id="refreshFJ" onClick="directparl.loadFJ()" title="Rafraîchir la feuille jaune">Recharger</button>
+            <h3></h3>
+            <table></table>
+          </div>
+        </div>
       </div>
-      <button id="random" onClick="directparl.randomMP()">Au hasard</button>
-      <div id="FJ"></div>
     </div>
   </div>
   <div id="bottom">

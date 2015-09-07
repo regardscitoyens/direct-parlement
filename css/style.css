@@ -88,8 +88,16 @@ h1 a, h1 a:visited, #linkFJ a, #linkFJ a:visited{
   height: 380px;
   overflow-y: auto;
 }
+#content, #FJloaded{
+  display: none;
+}
 #linkFJ{
   float: left;
+  margin: 5px;
+}
+#refreshFJ{
+  float: right;
+  margin: 5px;
 }
 #FJ table{
   width: 100%;
