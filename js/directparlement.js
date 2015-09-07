@@ -262,15 +262,17 @@
             context = '',
             inscrit = '',
             FJ = '';
-          ns.pdfText.replace(/((S?\/?Adt n° \d+ (\([\w. ]+\) )?de )?M[.me]+ |TITRE|ARTICLE|AVANT|APRÈS|[\- ] |I[nN][sS][cC][rR][iI][tT])/g, '\n$1')
+          ns.pdfText.replace(/((S?\/?Adt n° \d+ (\([\w. ]+\) )?d[eu] )?(Gouvernement|M[.me]+) |TITRE|ARTICLE|AVANT|APRÈS|[\- ] |I[nN][sS][cC][rR][iI][tT])/g, '\n$1')
             .replace(/(\d+’)/g, '$1\n')
             .split('\n').forEach(function(l){
               l = l.trim();
-              if (!l || l === 'GOUVERNEMENT') return;
-              parl = l.match(/((S?\/?Adt n° (\d+) (\([\w. ]+\) )?)de )?M[.me]+ (.*?([A-ZÀÂÉÈÊËÎÏÔÖÙÛÜÇ\-]{3,} ?)+)(, (\D*))?( *(\d+’))?/);
+              if (!l) return;
+              parl = l.match(/((S?\/?Adt n° (\d+) (\([\w. ]+\) )?)d[eu] )?(Gouvernement|M[.me]+ (.*?([A-ZÀÂÉÈÊËÎÏÔÖÙÛÜÇ\-]{3,} ?)+))(, (\D*))?( *(\d+’))?/);
+              if (l === 'GOUVERNEMENT')
+                parl = [,,,,,,'Gouvernement']
               if (parl){
                 var pid = '',
-                  name = parl[5],
+                  name = parl[6] || parl[5],
                   parls = ns.matchDeputes(name);
                 if (!parls.length) console.log('WARNING: could not find MP', parl);
                 else if (parls.length > 1) {
@@ -294,13 +296,12 @@
                   FJ += '<tr class="title"><td colspan="4">' + texte + '</td></tr>';
                 }
                 if (inscrit && parl[2]) inscrit = '';
+                var meta = inscrit || parl[2] || (parl[9] ? parl[9].replace('cion', 'com') : '');
                 FJ += '<tr' + (odd ? ' class="odd"' : '') + 
                               (pid ? ' style="cursor:pointer" onClick="directparl.displayMP(' + pid + ')"' : '' ) + '>' +
                         '<td>' + name + '</td>' +
-                        '<td' + (context ? '>' + context + '</td><td' : ' colspan="2"') + '>' +
-                          (inscrit || parl[2] || parl[8].replace('cion', 'com') || '') +
-                        '</td>' +
-                        '<td>' + (parl[10] || '') + '</td>' +
+                        '<td' + (context ? '>' + context + '</td><td' : ' colspan="2"') + '>' + meta + '</td>' +
+                        '<td>' + (parl[11] || '') + '</td>' +
                       '</tr>';
               } else if (l.match(/^(A(PR[EÈ]S|VANT|RTICLE)|TITRE)/)){
                 l = l.toLowerCase().replace(/article/, 'art.');
