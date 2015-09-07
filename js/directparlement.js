@@ -256,27 +256,31 @@
           var date = ns.pdfText.match(/LA SÉANCE (\S+ \d+ \S+ \d+ Séance de \d+ HEURES( \d+)?)/)[1],
             current = null,
             odd = false,
+            texte = '',
+            readtexte = false,
+            readcontext = false,
             context = '',
+            inscrit = '',
             FJ = '';
-          ns.pdfText.replace(/((S?\/?Adt n° \d+ (\([\w. ]+\) )?de )?M[.me]+ |TITRE|ARTICLE|AVANT|APRÈS|[\- ] )/g, '\n$1')
+          ns.pdfText.replace(/((S?\/?Adt n° \d+ (\([\w. ]+\) )?de )?M[.me]+ |TITRE|ARTICLE|AVANT|APRÈS|[\- ] |I[nN][sS][cC][rR][iI][tT])/g, '\n$1')
             .replace(/(\d+’)/g, '$1\n')
             .split('\n').forEach(function(l){
               l = l.trim();
-              if (!l) return;
+              if (!l || l === 'GOUVERNEMENT') return;
               parl = l.match(/((S?\/?Adt n° (\d+) (\([\w. ]+\) )?)de )?M[.me]+ (.*?([A-ZÀÂÉÈÊËÎÏÔÖÙÛÜÇ\-]{3,} ?)+)(, (\D*))?( *(\d+’))?/);
               if (parl){
                 var pid = '',
                   name = parl[5],
                   parls = ns.matchDeputes(name);
-                if (!parls.length) console.log("WARNING: could not find MP", parl);
+                if (!parls.length) console.log('WARNING: could not find MP', parl);
                 else if (parls.length > 1) {
                   var good = parls.filter(function(p){
-                    return ~(ns.clean_accents(p.label.toLowerCase()).indexOf(" " + ns.clean_accents(name.toLowerCase())));
+                    return ~(ns.clean_accents(p.label.toLowerCase()).indexOf(' ' + ns.clean_accents(name.toLowerCase())));
                   });
                   if (good && good.length === 1) {
                     name = good[0].label;
                     pid = good[0].depid;
-                  } else console.log("WARNING: multiple parls found for MP", parl, parls);
+                  } else console.log('WARNING: multiple parls found for MP', parl, parls);
                 } else {
                   name = parls[0].label;
                   pid = parls[0].depid;
@@ -285,17 +289,40 @@
                   current = pid;
                   odd = !odd;
                 }
+                if (readtexte) {
+                  readtexte = false;
+                  FJ += '<tr class="title"><td colspan="4">' + texte + '</td></tr>';
+                }
+                if (inscrit && parl[2]) inscrit = '';
                 FJ += '<tr' + (odd ? ' class="odd"' : '') + 
                               (pid ? ' style="cursor:pointer" onClick="directparl.displayMP(' + pid + ')"' : '' ) + '>' +
                         '<td>' + name + '</td>' +
-                        '<td>' + (parl[8] || '') + '</td>' +
-                        '<td>' + context + '</td>' +
-                        '<td>' + (parl[2] || '') + '</td>' +
+                        '<td' + (context ? '>' + context + '</td><td' : ' colspan="2"') + '>' +
+                          (inscrit || parl[2] || parl[8].replace('cion', 'com') || '') +
+                        '</td>' +
                         '<td>' + (parl[10] || '') + '</td>' +
                       '</tr>';
+              } else if (l.match(/^(A(PR[EÈ]S|VANT|RTICLE)|TITRE)/)){
+                l = l.toLowerCase().replace(/article/, 'art.');
+                if (readcontext){
+                  readcontext = false;
+                  context += l;
+                } else{
+                  context = l;
+                  if (~l.indexOf("l'")) readcontext = true;
+                }
+              } else if (l.match(/^inscrit/i)){
+                inscrit = "inscrit";
+              } else if (l.match(/^- [A-ZÀÂÉÈÊËÎÏÔÖÙÛÜÇ]{3,}/) || (readtexte && l.match(/^([A-ZÀÂÉÈÊËÎÏÔÖÙÛÜÇ\- :,']+|\(.*\))$/))){
+                context = '';
+                inscrit = false;
+                readcontext = false;
+                if (!l.indexOf('- ')) {
+                  readtexte = true;
+                  texte = l.replace(/^- /, '');
+                } else texte += ' ' + l;
               } else {
-                // context = ;
-                //console.log('nope', l);
+                console.log(l);
               }
             });
           $('#FJ h3').text(date);

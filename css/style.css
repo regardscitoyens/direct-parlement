@@ -85,7 +85,8 @@ h1 a, h1 a:visited, #linkFJ a, #linkFJ a:visited{
 #FJ{
   background-color: #FFFFAA;
   width: 98%;
-  height: 380px;
+  margin: auto;
+  height: 375px;
   overflow-y: auto;
 }
 #content, #FJloaded{
@@ -93,11 +94,11 @@ h1 a, h1 a:visited, #linkFJ a, #linkFJ a:visited{
 }
 #linkFJ{
   float: left;
-  margin: 5px;
+  margin: -5px 0px 0px 10px;
 }
 #refreshFJ{
   float: right;
-  margin: 5px;
+  margin: -5px 10px;
 }
 #FJ table{
   width: 100%;
@@ -107,6 +108,11 @@ h1 a, h1 a:visited, #linkFJ a, #linkFJ a:visited{
 }
 #FJ .odd{
   background-color: #FFFF88;
+}
+#FJ .title{
+  background-color: #FFFF55;
+  height: 34px;
+  font-weight: bold;
 }
 #bottom{
   width: 100%;
