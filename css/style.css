@@ -3,6 +3,7 @@ body{
   margin: 0;
   text-align: center;
   font-size: 14px;
+  overflow: hidden;
 }
 #top{
   width: 100%;
@@ -51,7 +52,7 @@ body{
   float: left;
   padding-left: 10px;
   height: 100%;
-  overflow-y: auto;
+  overflow: auto;
 }
 h1{
   font-size: 24px;
@@ -78,8 +79,12 @@ h1 a, h1 a:visited{
 .ui-autocomplete li{
   font-size: 0.8em;
 }
+#random{
+  margin: 10px;
+}
 #bottom{
   width: 100%;
+  overflow-y: auto;
 }
 #widget{
   padding-top: 10px;
@@ -87,14 +92,12 @@ h1 a, h1 a:visited{
   float: left;
   width: 1000px;
   min-height: 300px;
-  overflow: auto;
-}
-#random{
-  margin: 10px;
 }
 #autres{
   float: left;
   text-align: left;
+  min-height: 200px;
+  height: 100%;
 }
 h2{
   font-size: 18px;

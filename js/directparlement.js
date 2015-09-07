@@ -231,7 +231,7 @@
 
   ns.setResponsive = function(){
     $('#right').width($(window).width() - $('#incrust').width() - $('#right').css('padding-left').replace('px', '') - 1);
-    $('#autres').height($(window).height() - $('#top').height() - 1);
+    $('#bottom').height($(window).height() - $('#top').height() - 1);
   };
 
   $(document).ready(function(){
