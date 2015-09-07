@@ -21,8 +21,8 @@ body{
 }
 #metas{
   float: left;
-  max-width: 580px;
-  margin-left: 100px;
+  max-width: 530px;
+  margin-left: 60px;
   margin-top: 190px;
   font-family: sans-serif;
   font-size: 18px;
@@ -52,12 +52,12 @@ body{
   float: left;
   padding-left: 10px;
   height: 100%;
-  overflow: auto;
+  overflow: hidden;
 }
 h1{
   font-size: 24px;
 }
-h1 a, h1 a:visited{
+h1 a, h1 a:visited, #linkFJ a, #linkFJ a:visited{
   text-decoration: none;
   color: inherit;
 }
@@ -81,6 +81,24 @@ h1 a, h1 a:visited{
 }
 #random{
   margin: 10px;
+}
+#FJ{
+  background-color: #FFFFAA;
+  width: 98%;
+  height: 380px;
+  overflow-y: auto;
+}
+#linkFJ{
+  float: left;
+}
+#FJ table{
+  width: 100%;
+}
+#FJ tr{
+  height: 28px;
+}
+#FJ .odd{
+  background-color: #FFFF88;
 }
 #bottom{
   width: 100%;

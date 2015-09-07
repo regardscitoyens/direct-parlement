@@ -2,11 +2,16 @@
 
   ns.accentMap = {
     'á': 'a', 'à': 'a', 'â': 'a',
+    'À': 'a', 'Â': 'a',
     'é': 'e', 'è': 'e', 'ê': 'e', 'ë': 'e',
-    'ç': 'c',
+    'É': 'e', 'È': 'e', 'Ê': 'e', 'Ë': 'e',
+    'ç': 'c', 'Ç': 'c',
     'î': 'i', 'ï': 'i',
+    'Î': 'i', 'Ï': 'i',
     'ô': 'o', 'ö': 'o',
-    'ù': 'u', 'û': 'u', 'ü': 'u'
+    'Ô': 'o', 'Ö': 'o',
+    'ù': 'u', 'û': 'u', 'ü': 'u',
+    'Ù': 'u', 'Û': 'u', 'Ü': 'u'
   };
   ns.clean_accents = function(term){
     var ret = '';
@@ -133,6 +138,27 @@
   };
 
   ns.deputes = {};
+  ns.deputesAr = [];
+  ns.matchDeputes = function(request, response){
+    var matcher = new RegExp($.ui.autocomplete.escapeRegex(ns.clean_accents(request.term || request)), 'i');
+    var res = $.grep(
+      ns.deputesAr.sort(function(a, b){
+        return (a.nom_de_famille > b.nom_de_famille ? 1 : -1)
+      }).map(function(d){
+        return {
+          label: d.display,
+          value: d.display,
+          depid: d.id
+        };
+      }),
+      function(d){
+        return matcher.test(ns.clean_accents(d.label));
+      }
+    );
+    if (response) response(res);
+    else return res;
+  };
+
   ns.downloadDeputes = function(){
     $.getJSON('http://www.nosdeputes.fr/deputes/enmandat/json', function(data){
       data.deputes.forEach(function(dep){
@@ -147,26 +173,10 @@
         return ns.deputes[d];
       });
       $('#listdeputes').autocomplete({
-        source: function(request, response){
-          var matcher = new RegExp($.ui.autocomplete.escapeRegex(ns.clean_accents(request.term)), 'i');
-          response($.grep(
-            ns.deputesAr.sort(function(a, b){
-              return (a.nom_de_famille > b.nom_de_famille ? 1 : -1)
-            }).map(function(d){
-              return {
-                label: d.display,
-                value: d.display,
-                dep: d
-              };
-            }),
-            function(d){
-              return matcher.test(ns.clean_accents(d.label));
-            }
-          ));
-        },
+        source: ns.matchDeputes,
         select: function(event, ui){
           event.preventDefault();
-          ns.displayMP(ui.item.dep.id);
+          ns.displayMP(ui.item.depid);
         }
       });
   
@@ -183,6 +193,7 @@
   };
 
   ns.displayMP = function(depid){
+    if (ns.dep && depid == ns.dep.id) return;
     ns.dep = ns.deputes[depid];
     var sexe = 'Député' + (ns.dep.sexe === 'F' ? 'e' : ''),
       twitter = (ns.dep.twitter ? '@' + ns.dep.twitter : ''),
@@ -190,7 +201,7 @@
       extra_mandats = '<h2>A' + (ns.dep.nb_mandats > 1 ? '' : 'ucun a') + 'utre' + plural + ' mandat' + plural + (ns.dep.nb_mandats > 1 ? ' :</h2><ul>' : '</h2>');
 
     ns.dep.autres_mandats.forEach(function(m){
-      m = m["mandat"].split(' / ');
+      m = m['mandat'].split(' / ');
       var fonction = (/^(pr[eé]sid|maire)/i.test(m[2]) ? '<b>' + m[2] + '</b>' :  m[2]);
       extra_mandats += '<li>' + m[0] + ' &mdash; ' + m[1] + ' (' + fonction + ')</li>';
     });
@@ -214,7 +225,7 @@
           ns.dep.debut_mandat = a[0];
       });
     }
-    ns.dep.profession = (ns.dep.profession ? ns.dep.profession.replace('declare', 'déclaré') : 'Sans profession déclarée');
+    ns.dep.profession = (ns.dep.profession ? ns.dep.profession.replace('declare', 'déclaré').replace(/,.*$/, '') : 'Sans profession déclarée');
 
     $('#name').text(ns.dep.nom);
     $('#descr').text(sexe + ' ' + ns.departements[ns.dep.nom_circo] + ns.dep.nom_circo);
@@ -234,9 +245,79 @@
     $('#bottom').height($(window).height() - $('#top').height() - 1);
   };
 
+  ns.pdfText = '';
+  ns.getPDFPages = function(pageN){
+    pageN = pageN || 1;
+    ns.pdf.getPage(pageN).then(function(page){
+      page.getTextContent().then(function(textPDF){
+        ns.pdfText += ' ' + textPDF.items.map(function(i){
+          return i.str;
+        }).join('');
+        if (pageN < ns.pdf.numPages)
+          ns.getPDFPages(pageN + 1);
+        else {
+          var date = ns.pdfText.match(/LA SÉANCE (\S+ \d+ \S+ \d+ Séance de \d+ HEURES( \d+)?)/)[1],
+            FJ = '<b id="linkFJ"><a target="_blank" href="http://www.assemblee-nationale.fr/14/seance/feuille-jaune.pdf?refresh=true">@</a></b>' +
+                 '<h3>' + date + '</h3>' +
+                 '<table>',
+            current = null,
+            odd = false,
+            context = '';
+          ns.pdfText.replace(/((S?\/?Adt n° \d+ (\([\w. ]+\) )?de )?M[.me]+ |TITRE|ARTICLE|AVANT|APRÈS|[\- ] )/g, '\n$1')
+            .replace(/(\d+’)/g, '$1\n')
+            .split('\n').forEach(function(l){
+              l = l.trim();
+              if (!l) return;
+              parl = l.match(/((S?\/?Adt n° (\d+) (\([\w. ]+\) )?)de )?M[.me]+ (.*?([A-ZÀÂÉÈÊËÎÏÔÖÙÛÜÇ\-]{3,} ?)+)(, (\D*))?( *(\d+’))?/);
+              if (parl){
+                var pid = '',
+                  name = parl[5],
+                  parls = ns.matchDeputes(name);
+                if (!parls.length) console.log("WARNING: could not find MP", parl);
+                else if (parls.length > 1) {
+                  var good = parls.filter(function(p){
+                    return ~(ns.clean_accents(p.label.toLowerCase()).indexOf(" " + ns.clean_accents(name.toLowerCase())));
+                  });
+                  if (good && good.length == 1) {
+                    name = good[0].label;
+                    pid = good[0].depid;
+                  } else console.log("WARNING: multiple parls found for MP", parl, parls);
+                } else {
+                  name = parls[0].label;
+                  pid = parls[0].depid;
+                }
+                if (pid != current) {
+                  current = pid;
+                  odd = !odd;
+                }
+                FJ += '<tr' + (odd ? ' class="odd"' : '') + 
+                              (pid ? ' style="cursor:pointer" onClick="directparl.displayMP(' + pid + ')"' : '' ) + '>' +
+                        '<td>' + name + '</td>' +
+                        '<td>' + (parl[8] || '') + '</td>' +
+                        '<td>' + context + '</td>' +
+                        '<td>' + (parl[2] || '') + '</td>' +
+                        '<td>' + (parl[10] || '') + '</td>' +
+                      '</tr>';
+              } else {
+                // context = ;
+                //console.log('nope', l);
+              }
+            });
+          FJ += '</table>';
+          $('#FJ').html(FJ);
+        }
+      });
+    });
+  };
+ 
   $(document).ready(function(){
     ns.setResponsive();
     ns.downloadDeputes();
+    PDFJS.getDocument('http://www.nosdeputes.fr/feuille-jaune/last.pdf').then(function(pdf){
+      ns.pdf = pdf;
+      ns.getPDFPages();
+   });
+
   });
   $(window).resize(ns.setResponsive);
 
