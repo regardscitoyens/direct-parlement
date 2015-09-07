@@ -214,10 +214,11 @@
           ns.dep.debut_mandat = a[0];
       });
     }
+    ns.dep.profession = (ns.dep.profession ? ns.dep.profession.replace('declare', 'déclaré') : 'Sans profession déclarée');
 
     $('#name').text(ns.dep.nom);
     $('#descr').text(sexe + ' ' + ns.departements[ns.dep.nom_circo] + ns.dep.nom_circo);
-    $('#details').html(ns.annees(ns.dep.date_naissance) + ' - ' + sexe.toLowerCase() + ' depuis ' + ns.annees(ns.dep.debut_mandat) + '<br>' + ns.dep.profession.replace('declare', 'déclaré'));
+    $('#details').html(ns.annees(ns.dep.date_naissance) + ' - ' + sexe.toLowerCase() + ' depuis ' + ns.annees(ns.dep.debut_mandat) + '<br>' + ns.dep.profession);
     $('#extra').html(twitter);
     $('#groupe img').attr('src', 'logos/AN/' + ns.dep.groupe_sigle.toUpperCase() + '.png');
     $('#widget').attr('src', 'http://www.nosdeputes.fr/widget14/' + ns.dep.slug + '?iframe=true&width=950');
