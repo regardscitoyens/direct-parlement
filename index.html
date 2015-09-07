@@ -1,7 +1,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Direct Parlement - Députés</title>
+  <title>Direct Parlement - Regards Citoyens</title>
   <link rel="stylesheet" type="text/css" href="css/style.css">
   <link rel="stylesheet" type="text/css" href="css/jquery-ui-smoothness.css">
 </head>
@@ -14,29 +14,30 @@
         <span id="details"></span><br/>
         <span id="extra"></span>
       </div>
-      <div id="logo">
+      <div id="groupe">
         <img src="">
       </div>
     </div>
     <div id="right">
-      <h1>Direct Parlement - Députés</h1>
+      <div id="title">
+        <a id="logo" target="_blank" href="http://www.RegardsCitoyens.org"><img src="logos/regardscitoyens.png" alt="RegardsCitoyens.org" title="Regards Citoyens"/></a>
+        <h1>Direct Parlement <small>par <a href="http://www.RegardsCitoyens.org">Regards Citoyens</a></small></h1>
+      </div>
       <p id="loader">Chargement...</p>
       <div id="content" style="display: none">
-        <div class="row">
-          <div id="menu" class="ui-widget">
-            <label for="deputes">Député : </label>
-            <input id="deputes">
-          </div>
-          <button id="random" onClick="directparl.randomMP()">Au hasard</button>
+        <div id="menu" class="ui-widget">
+          <label for="listdeputes">Député : </label>
+          <input id="listdeputes">
         </div>
       </div>
+      <button id="random" onClick="directparl.randomMP()">Au hasard</button>
     </div>
   </div>
   <div id="bottom">
     <iframe id="widget" frameborder="0" scrolling="no" src=""></iframe>
     <div id="autres"></div>
-  <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
   </div>
+  <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
   <script type="text/javascript" src="js/jquery-ui-1.11.4.autocomplete.js"></script>
   <script type="text/javascript" src="js/directparlement.js"></script>
 </body>
