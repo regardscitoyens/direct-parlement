@@ -146,40 +146,34 @@
       ns.deputesAr = Object.keys(ns.deputes).map(function(d){
         return ns.deputes[d];
       });
-      ns.dep = ns.deputesAr[parseInt(Math.random() * ns.deputesAr.length)];
-      ns.buildSelectMenu();
+      $('#deputes').autocomplete({
+        source: function(request, response){
+          var matcher = new RegExp($.ui.autocomplete.escapeRegex(ns.clean_accents(request.term)), 'i');
+          response($.grep(
+            ns.deputesAr.sort(function(a, b){
+              return (a.nom_de_famille > b.nom_de_famille ? 1 : -1)
+            }).map(function(d){
+              return {
+                label: d.display,
+                value: d.display,
+                dep: d
+              };
+            }),
+            function(d){
+              return matcher.test(ns.clean_accents(d.label));
+            }
+          ));
+        },
+        select: function(event, ui){
+          event.preventDefault();
+          ns.displayMP(ui.item.dep.id);
+        }
+      });
+  
+      $('#loader').hide();
+      $('#content').show();
+      ns.randomMP();
     });
-  };
-
-  ns.buildSelectMenu = function(){
-    $('#deputes').autocomplete({
-      source: function(request, response){
-        var matcher = new RegExp($.ui.autocomplete.escapeRegex(ns.clean_accents(request.term)), 'i');
-        response($.grep(
-          ns.deputesAr.sort(function(a, b){
-            return (a.nom_de_famille > b.nom_de_famille ? 1 : -1)
-          }).map(function(d){
-            return {
-              label: d.display,
-              value: d.display,
-              dep: d
-            };
-          }),
-          function(d){
-            return matcher.test(ns.clean_accents(d.label));
-          }
-        ));
-      },
-      select: function(event, ui){
-        event.preventDefault();
-        ns.dep = ui.item.dep;
-        ns.displayMP();
-      }
-    });
-
-    $('#loader').hide();
-    $('#content').show();
-    ns.displayMP();
   };
 
   ns.annees = function(date){
@@ -188,7 +182,8 @@
     return age + ' an' + (age > 1 ? 's' : '');
   };
 
-  ns.displayMP = function(){
+  ns.displayMP = function(depid){
+    ns.dep = ns.deputes[depid];
     var sexe = 'Député' + (ns.dep.sexe === 'F' ? 'e' : ''),
       twitter = (ns.dep.twitter ? '@' + ns.dep.twitter : ''),
       plural = (ns.dep.nb_mandats > 2 ? 's' : ''),
@@ -227,6 +222,10 @@
     $('#logo img').attr('src', 'logos/AN/' + ns.dep.groupe_sigle.toUpperCase() + '.png');
     $('#widget').attr('src', 'http://www.nosdeputes.fr/widget14/' + ns.dep.slug + '?iframe=true&width=950');
     $('#autres').html(extra_mandats);
+  };
+
+  ns.randomMP = function(){
+    ns.displayMP(Object.keys(ns.deputes)[parseInt(Math.random() * ns.deputesAr.length)]);
   };
 
   ns.setResponsive = function(){
