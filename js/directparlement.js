@@ -1,5 +1,4 @@
 /* TODO
- - handle contexte feuille jaune + links amds?
  - improve logos
  - ministres ?
 */
@@ -323,7 +322,7 @@
                   texte = l.replace(/^- /, '');
                 } else texte += ' ' + l;
               } else {
-                console.log(l);
+                //console.log(l);
               }
             });
           $('#FJ h3').text(date);
