@@ -1,6 +1,7 @@
 /* TODO
- - improve logos
- - ministres ?
+ - improve logos groupes
+ - favico
+ - test FJ QAG
 */
 (function (ns){
 
@@ -141,14 +142,17 @@
     return new Date(date_str);
   };
 
+  ns.sort_by_name = function(a,b){
+    return (a.nom_de_famille > b.nom_de_famille ? 1 : -1)
+  };
+
   ns.deputes = {};
   ns.deputesAr = [];
   ns.matchDeputes = function(request, response){
     var matcher = new RegExp($.ui.autocomplete.escapeRegex(ns.clean_accents(request.term || request)), 'i');
     var res = $.grep(
-      ns.deputesAr.sort(function(a, b){
-        return (a.nom_de_famille > b.nom_de_famille ? 1 : -1)
-      }).map(function(d){
+      ns.deputesAr.sort(ns.sort_by_name)
+      .map(function(d){
         return {
           label: d.display,
           value: d.display,
@@ -173,12 +177,16 @@
       $.get('resources/gouvernement.csv', function(gouvdata){
         var ministres = [],
           count = 0,
-          minid;
-        gouvdata.split('\n').forEach(function(row){
+          minid,
+          ministre = {};
+        gouvdata.replace(/(^"|"$)/g, '')
+        .replace(/"?,"?(\S)/g, ';$1')
+        .split('\n')
+        .forEach(function(row){
           if (!row.trim() || ~row.indexOf('nom')) return;
-          row = row.split(';')
+          row = row.split(';');
           minid = "gouv-" + count++;
-          ns.deputes[minid] = {
+          ministre = {
             id: minid,
             nom: row[0],
             nom_de_famille: row[0],
@@ -189,8 +197,15 @@
             nb_mandats: 0,
             autres_mandats: []
           };
-          console.log(ns.deputes[minid]);
+          ns.deputes[minid] = ministre;
+          ministres.push(ministre);
         });
+
+        ministres.sort(ns.sort_by_name)
+        .forEach(function(m){
+          $('#ministre').append('<option value="' + m.id + '">' + m.display + '</option>');
+        });
+
         ns.deputesAr = Object.keys(ns.deputes).map(function(d){
           return ns.deputes[d];
         });
@@ -198,6 +213,7 @@
           source: ns.matchDeputes,
           select: function(event, ui){
             event.preventDefault();
+            $('#ministre').val('');
             ns.displayMP(ui.item.depid);
           }
         });
@@ -215,8 +231,12 @@
     return age + ' an' + (age > 1 ? 's' : '');
   };
 
+  ns.displayMinistre = function(){
+    ns.displayMP($('#ministre').val());
+  };
+
   ns.displayMP = function(depid){
-    if (ns.dep && depid === ns.dep.id) return;
+    if (!depid || (ns.dep && depid === ns.dep.id)) return;
     ns.dep = ns.deputes[depid];
     var sexe = (ns.fonction ? ns.fonction : 'Député' + (ns.dep.sexe === 'F' ? 'e' : '')),
       twitter = (ns.dep.twitter ? '@' + ns.dep.twitter : ''),
@@ -267,6 +287,7 @@
   };
 
   ns.randomMP = function(){
+    $('#ministre').val('');
     ns.displayMP(Object.keys(ns.deputes)[parseInt(Math.random() * ns.deputesAr.length)]);
   };
 

@@ -28,11 +28,17 @@
       </div>
       <p id="loader">Chargement...</p>
       <div id="content">
-        <div id="menu" class="ui-widget">
-          <label for="listdeputes">Député : </label>
-          <input id="listdeputes">
+        <div id="gouv" class="ui-widget">
+          <label for="listministres">Ministres : </label>
+          <select name="listministres" id="ministre" onChange="directparl.displayMinistre()">
+            <option id="noministre" value="" selected="selected"></option>
+          </select>
         </div>
-        <button id="random" onClick="directparl.randomMP()">Au hasard</button>
+        <div id="menu" class="ui-widget">
+          <label for="listdeputes">Chercher : </label>
+          <input id="listdeputes">
+          <button id="random" onClick="directparl.randomMP()">Au hasard</button>
+        </div>
         <div id="FJ">
           <p id="loaderFJ">Chargement...</p>
           <div id="FJloaded">
