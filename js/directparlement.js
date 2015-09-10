@@ -1,6 +1,5 @@
 /* TODO
  - improve logos groupes
- - favico
  - test FJ QAG
 */
 (function (ns){
