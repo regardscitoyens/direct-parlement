@@ -168,23 +168,44 @@
       data.deputes.forEach(function(dep){
         var d = dep.depute;
         d.display = d.prenom + ' ' + d.nom_de_famille + ' (' + d.groupe_sigle + ')';
-        if (!ns.deputes[d.id]) ns.deputes[d.id] = d;
-        else for (var key in d) ns.deputes[d.id][key] = d[key];
+        ns.deputes[d.id] = d;
       });
-      ns.deputesAr = Object.keys(ns.deputes).map(function(d){
-        return ns.deputes[d];
+      $.get('resources/gouvernement.csv', function(gouvdata){
+        var ministres = [],
+          count = 0,
+          minid;
+        gouvdata.split('\n').forEach(function(row){
+          if (!row.trim() || ~row.indexOf('nom')) return;
+          row = row.split(';')
+          minid = "gouv-" + count++;
+          ns.deputes[minid] = {
+            id: minid,
+            nom: row[0],
+            nom_de_famille: row[0],
+            display: row[0] + " " + row[1],
+            fonction: row[1],
+            date_naissance: row[2],
+            twitter: row[3] || "",
+            nb_mandats: 0,
+            autres_mandats: []
+          };
+          console.log(ns.deputes[minid]);
+        });
+        ns.deputesAr = Object.keys(ns.deputes).map(function(d){
+          return ns.deputes[d];
+        });
+        $('#listdeputes').autocomplete({
+          source: ns.matchDeputes,
+          select: function(event, ui){
+            event.preventDefault();
+            ns.displayMP(ui.item.depid);
+          }
+        });
+    
+        $('#loader').hide();
+        $('#content').show();
+        ns.randomMP();
       });
-      $('#listdeputes').autocomplete({
-        source: ns.matchDeputes,
-        select: function(event, ui){
-          event.preventDefault();
-          ns.displayMP(ui.item.depid);
-        }
-      });
-  
-      $('#loader').hide();
-      $('#content').show();
-      ns.randomMP();
     });
   };
 
@@ -197,10 +218,10 @@
   ns.displayMP = function(depid){
     if (ns.dep && depid === ns.dep.id) return;
     ns.dep = ns.deputes[depid];
-    var sexe = 'Député' + (ns.dep.sexe === 'F' ? 'e' : ''),
+    var sexe = (ns.fonction ? ns.fonction : 'Député' + (ns.dep.sexe === 'F' ? 'e' : '')),
       twitter = (ns.dep.twitter ? '@' + ns.dep.twitter : ''),
       plural = (ns.dep.nb_mandats > 2 ? 's' : ''),
-      extra_mandats = '<h2>A' + (ns.dep.nb_mandats > 1 ? '' : 'ucun a') + 'utre' + plural + ' mandat' + plural + (ns.dep.nb_mandats > 1 ? ' :</h2><ul>' : '</h2>');
+      extra_mandats = (ns.dep.nb_mandats ? '<h2>A' + (ns.dep.nb_mandats > 1 ? '' : 'ucun a') + 'utre' + plural + ' mandat' + plural + (ns.dep.nb_mandats > 1 ? ' :</h2><ul>' : '</h2>') : '');
 
     ns.dep.autres_mandats.forEach(function(m){
       m = m['mandat'].split(' / ');
@@ -208,8 +229,7 @@
       extra_mandats += '<li>' + m[0] + ' &mdash; ' + m[1] + ' (' + fonction + ')</li>';
     });
     if (ns.dep.nb_mandats > 1) extra_mandats += '</ul>'
-
-    if (!ns.dep.debut_mandat) {
+    if (!ns.dep.debut_mandat && !ns.dep.fonction) {
       ns.dep.debut_mandat = ns.datize(ns.dep.mandat_debut);
       ns.dep.anciens_mandats.filter(function(a){
         return a['mandat'].indexOf(' /  / ') === -1;
@@ -230,12 +250,20 @@
     ns.dep.profession = (ns.dep.profession ? ns.dep.profession.replace('declare', 'déclaré').replace(/,.*$/, '') : 'Sans profession déclarée');
 
     $('#name').text(ns.dep.nom);
-    $('#descr').text(sexe + ' ' + ns.departements[ns.dep.nom_circo] + ns.dep.nom_circo);
-    $('#details').html(ns.annees(ns.dep.date_naissance) + ' - ' + sexe.toLowerCase() + ' depuis ' + ns.annees(ns.dep.debut_mandat) + '<br>' + ns.dep.profession);
     $('#extra').html(twitter);
-    $('#groupe img').attr('src', 'logos/AN/' + ns.dep.groupe_sigle.toUpperCase() + '.png');
-    $('#widget').attr('src', 'http://www.nosdeputes.fr/widget14/' + ns.dep.slug + '?iframe=true&width=950');
     $('#autres').html(extra_mandats);
+    if (ns.dep.fonction){
+      $('#descr').text(ns.dep.fonction);
+      $('#details').text(ns.annees(ns.dep.date_naissance));
+      $('#groupe img').hide();
+      $('#widget').attr('src', '');
+    } else {
+      $('#descr').text(sexe + ' ' + ns.departements[ns.dep.nom_circo] + ns.dep.nom_circo);
+      $('#details').html(ns.annees(ns.dep.date_naissance) + ' - ' + sexe.toLowerCase() + ' depuis ' + ns.annees(ns.dep.debut_mandat) + '<br>' + ns.dep.profession);
+      $('#groupe img').show();
+      $('#groupe img').attr('src', 'logos/AN/' + ns.dep.groupe_sigle.toUpperCase() + '.png');
+      $('#widget').attr('src', 'http://www.nosdeputes.fr/widget14/' + ns.dep.slug + '?iframe=true&width=950');
+    }
   };
 
   ns.randomMP = function(){
@@ -273,8 +301,9 @@
                 var pid = '',
                   name = parl[6] || parl[5],
                   parls = ns.matchDeputes(name);
-                if (!parls.length) console.log('WARNING: could not find MP', parl);
-                else if (parls.length > 1) {
+                if (!parls.length) {
+                  if (name !== 'Gouvernement') console.log('WARNING: could not find MP', parl);
+                } else if (parls.length > 1) {
                   var good = parls.filter(function(p){
                     return ~(ns.clean_accents(p.label.toLowerCase()).indexOf(' ' + ns.clean_accents(name.toLowerCase())));
                   });
