@@ -297,7 +297,7 @@
   ns.formatMProw = function(odd, pid, name, context, meta, qag, extra){
     var row = '<tr' + (extra ? ' id="' + extra + '"' : '') +
                   ' class="' + (odd ? 'odd' : '') + ' ' + (pid || qag ? 'clickable' : '') + '"',
-        onclick = (pid ? ' onClick="directparl.displayMP(' + pid + ')"' : '' );
+        onclick = (pid ? ' onClick="directparl.displayMP(' + "'" + pid + "'" + ')"' : '' );
     if (qag)
       row += '><td colspan="3" ' + onclick + '>' + name + '</td>' +
              '<td><button onClick="directparl.setQagMP(' + "'" + extra + "'" + ')">définir</button></td>';
