@@ -1,6 +1,5 @@
 /* TODO
  - improve logos groupes
- - test FJ QAG
 */
 (function (ns){
 
@@ -170,7 +169,7 @@
     $.getJSON('http://www.nosdeputes.fr/deputes/enmandat/json', function(data){
       data.deputes.forEach(function(dep){
         var d = dep.depute;
-        d.display = d.prenom + ' ' + d.nom_de_famille + ' (' + d.groupe_sigle + ')';
+        d.display = d.nom + ' (' + d.groupe_sigle + ')';
         ns.deputes[d.id] = d;
       });
       $.get('resources/gouvernement.csv', function(gouvdata){
@@ -290,6 +289,28 @@
     ns.displayMP(Object.keys(ns.deputes)[parseInt(Math.random() * ns.deputesAr.length)]);
   };
 
+  ns.setQagMP = function(rowid){
+    event.stopPropagation();
+    var row = $('#' + rowid);
+    row.replaceWith(ns.formatMProw(row.hasClass('odd'), ns.dep.id, ns.dep.display, '', '', true, rowid));
+  };
+
+  ns.formatMProw = function(odd, pid, name, context, meta, qag, extra){
+    var row = '<tr' + (extra ? ' id="' + extra + '"' : '') +
+          (odd ? ' class="odd"' : '') + 
+          (pid ? ' style="cursor:pointer" onClick="directparl.displayMP(' + pid + ')"' : '' ) +
+              '>';
+    if (qag)
+      row += '<td colspan="3">' + name + '</td>' +
+             '<td><button onClick="directparl.setQagMP(' + "'" + extra + "'" + ')">définir</button></td>';
+    else
+      row += '<td>' + name + '</td>' +
+             '<td' + (context ? '>' + context + '</td><td' : ' colspan="2"') + '>' + meta + '</td>' +
+             '<td>' + extra + '</td>';
+    row += '</tr>';
+    return row;
+  };
+
   ns.getPDFPages = function(pageN){
     pageN = pageN || 1;
     ns.pdf.getPage(pageN).then(function(page){
@@ -308,7 +329,39 @@
             readcontext = false,
             context = '',
             inscrit = '',
-            FJ = '';
+            FJ = '',
+            add_FJ_line = function(parl, check){
+              check = check || false;
+              var pid = '',
+                name = parl[6] || parl[5],
+                parls = ns.matchDeputes(name);
+              if (!parls.length){
+                if (check && name !== "Gouvernement") console.log('WARNING: could not find MP', parl);
+              } else if (parls.length > 1){
+                var good = parls.filter(function(p){
+                  return ~(ns.clean_accents(p.label.toLowerCase()).indexOf(' ' + ns.clean_accents(name.toLowerCase())));
+                });
+                if (good && good.length === 1){
+                  name = good[0].label;
+                  pid = good[0].depid;
+                } else console.log('WARNING: multiple parls found for MP', parl, parls);
+              } else {
+                name = parls[0].label;
+                pid = parls[0].depid;
+              }
+              if (pid != current){
+                current = pid;
+                odd = !odd;
+              }
+              if (readtexte){
+                readtexte = false;
+                FJ += '<tr class="title"><td colspan="4">' + texte + '</td></tr>';
+              }
+              if (inscrit && parl[2]) inscrit = '';
+              var meta = inscrit || parl[2] || (parl[9] ? parl[9].replace('cion', 'com') : '');
+              FJ += ns.formatMProw(odd, pid, name, context, meta, parl[7] == 'qag', (parl[11] || ''));
+            };
+
           ns.pdfText.replace(/((S?\/?Adt n° \d+ (\([\w. ]+\) )?d[eu] )?(Gouvernement|M[.me]+) |TITRE|ARTICLE|AVANT|APRÈS|[\- ] |I[nN][sS][cC][rR][iI][tT])/g, '\n$1')
             .replace(/(\d+’)/g, '$1\n')
             .split('\n').forEach(function(l){
@@ -316,41 +369,16 @@
               if (!l) return;
               parl = l.match(/((S?\/?Adt n° (\d+) (\([\w. ]+\) )?)d[eu] )?(Gouvernement|M[.me]+ (.*?([A-ZÀÂÉÈÊËÎÏÔÖÙÛÜÇ\-]{3,} ?)+))(, (\D*))?( *(\d+’))?/);
               if (l === 'GOUVERNEMENT')
-                parl = [,,,,,,'Gouvernement']
-              if (parl){
-                var pid = '',
-                  name = parl[6] || parl[5],
-                  parls = ns.matchDeputes(name);
-                if (!parls.length) {
-                  if (name !== 'Gouvernement') console.log('WARNING: could not find MP', parl);
-                } else if (parls.length > 1) {
-                  var good = parls.filter(function(p){
-                    return ~(ns.clean_accents(p.label.toLowerCase()).indexOf(' ' + ns.clean_accents(name.toLowerCase())));
-                  });
-                  if (good && good.length === 1) {
-                    name = good[0].label;
-                    pid = good[0].depid;
-                  } else console.log('WARNING: multiple parls found for MP', parl, parls);
-                } else {
-                  name = parls[0].label;
-                  pid = parls[0].depid;
-                }
-                if (pid != current) {
-                  current = pid;
-                  odd = !odd;
-                }
-                if (readtexte) {
-                  readtexte = false;
-                  FJ += '<tr class="title"><td colspan="4">' + texte + '</td></tr>';
-                }
-                if (inscrit && parl[2]) inscrit = '';
-                var meta = inscrit || parl[2] || (parl[9] ? parl[9].replace('cion', 'com') : '');
-                FJ += '<tr' + (odd ? ' class="odd"' : '') + 
-                              (pid ? ' style="cursor:pointer" onClick="directparl.displayMP(' + pid + ')"' : '' ) + '>' +
-                        '<td>' + name + '</td>' +
-                        '<td' + (context ? '>' + context + '</td><td' : ' colspan="2"') + '>' + meta + '</td>' +
-                        '<td>' + (parl[11] || '') + '</td>' +
-                      '</tr>';
+                add_FJ_line([,,,,,, 'Gouvernement']);
+              else if (!parl && l.match(/^\s*([A-ZÉ][^;]*\s*;\s*){4,}[A-ZÉ][^;]*\s*\.?$/)){
+                var nqag = 0;
+                l.replace(/\.$/, '')
+                .split(';')
+                .forEach(function(gpe){
+                  add_FJ_line([,,,,,, gpe.trim(), 'qag',,,, "qag" + ++nqag]);
+                });
+              } else if (parl){
+                add_FJ_line(parl, true);
               } else if (l.match(/^(A(PR[EÈ]S|VANT|RTICLE)|TITRE)/)){
                 l = l.toLowerCase().replace(/article/, 'art.');
                 if (readcontext){
@@ -377,16 +405,18 @@
           $('#FJ h3').text(date);
           $('#FJ table').html(FJ);
           $('#loaderFJ').hide();
+          ns.setResponsive();
           $('#FJloaded').show();
         }
       });
     });
   };
 
-  ns.loadFJ = function(){
+  ns.loadFJ = function(FJ){
+    FJ = FJ || 'last';
     $('#FJloaded').hide();
     $('#loaderFJ').show();
-    PDFJS.getDocument('http://www.nosdeputes.fr/feuille-jaune/last.pdf')
+    PDFJS.getDocument('http://www.nosdeputes.fr/feuille-jaune/' + FJ + '.pdf')
     .then(function(pdf){
       ns.pdf = pdf;
       ns.pdfText = '';
@@ -397,6 +427,7 @@
   ns.setResponsive = function(){
     $('#right').width($(window).width() - $('#incrust').width() - $('#right').css('padding-left').replace('px', '') - 3);
     $('#bottom').height($(window).height() - $('#top').height() - 3);
+    $('#FJ').height($('#top').height() - $('h1').outerHeight() - 2 * $('h1').css('margin-top').replace(/px/, '') - $('#gouv').outerHeight() - $('#menu').outerHeight() - 3);
   };
 
   $(window).resize(ns.setResponsive);

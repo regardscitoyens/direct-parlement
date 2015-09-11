@@ -96,7 +96,7 @@ h1 a, h1 a:visited, #linkFJ a, #linkFJ a:visited{
   float: left;
   margin: -5px 0px 0px 10px;
 }
-#refreshFJ{
+#refreshFJ, #testQAG{
   float: right;
   margin: -5px 10px;
 }
