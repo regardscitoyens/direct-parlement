@@ -290,21 +290,19 @@
   };
 
   ns.setQagMP = function(rowid){
-    event.stopPropagation();
     var row = $('#' + rowid);
     row.replaceWith(ns.formatMProw(row.hasClass('odd'), ns.dep.id, ns.dep.display, '', '', true, rowid));
   };
 
   ns.formatMProw = function(odd, pid, name, context, meta, qag, extra){
     var row = '<tr' + (extra ? ' id="' + extra + '"' : '') +
-                  ' class="' + (odd ? 'odd' : '') + ' ' + (pid || qag ? 'clickable' : '') + '"' +
-           (pid ? ' onClick="directparl.displayMP(' + pid + ')"' : '' ) +
-              '>';
+                  ' class="' + (odd ? 'odd' : '') + ' ' + (pid || qag ? 'clickable' : '') + '"',
+        onclick = (pid ? ' onClick="directparl.displayMP(' + pid + ')"' : '' );
     if (qag)
-      row += '<td colspan="3">' + name + '</td>' +
+      row += '><td colspan="3" ' + onclick + '>' + name + '</td>' +
              '<td><button onClick="directparl.setQagMP(' + "'" + extra + "'" + ')">définir</button></td>';
     else
-      row += '<td>' + name + '</td>' +
+      row += onclick + '><td>' + name + '</td>' +
              '<td' + (context ? '>' + context + '</td><td' : ' colspan="2"') + '>' + meta + '</td>' +
              '<td>' + extra + '</td>';
     row += '</tr>';
