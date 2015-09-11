@@ -1,35 +1,35 @@
 nom,nom_de_famille,fonction,date_naissance,twitter
-Pascale Boistard,Boistard,"Secrétaire d'État aux Droits des femmes",1971-01-04,
-Thierry Braillard,Braillard,"Secrétaire d'État aux Sports",1964-01-24,
-Bernard Cazeneuve,Cazeneuve,"Ministre de l'Intérieur",1963-06-02,
-Harlem Désir,Désir,"Secrétaire d'État aux Affaires européennes",1959-11-25,
-Christian Eckert,Eckert,"Secrétaire d'État au Budget",1956-02-08,
-Myriam El Khomri,El Khomri,"Ministre du Travail, de l'Emploi, de la Formation professionnelle et du Dialogue social",1978-02-18,
-Laurent Fabius,Fabius,"Ministre des Affaires étrangères et du Développement international",1946-08-20,
-Matthias Fekl,Fekl,"Secrétaire d'État au Commerce extérieur, à la Promotion du tourisme et aux Français de l'étranger",1977-10-04,
-Annick Girardin,Girardin,"Secrétaire d'État au Développement et à la Francophonie",1964-08-03,
-François Hollande,Hollande,"Président de la République",1954-08-12,
-Patrick Kanner,Kanner,"Ministre de la Ville, de la Jeunesse et des Sports",1957-04-29,
-Marylise Lebranchu,Lebranchu,"Ministre de la Décentralisation et de la Fonction publique",1947-04-25,
-Jean-Yves Le Drian,Le Drian,"Ministre de la Défense",1947-06-30,
-Stéphane Le Foll,Le Foll,"Ministre de l'Agriculture, de l'Agroalimentaire et de la Forêt, porte-parole du Gouvernement",1960-02-03,
-Jean-Marie Le Guen,Le Guen,"Secrétaire d'État aux Relations avec le Parlement",1953-01-03,
-Axelle Lemaire,Lemaire,"Secrétaire d'État au Numérique",1974-10-18,
-Emmanuel Macron,Macron,"Ministre de l'Économie, de l'Industrie et du Numérique",1977-12-21,
-Thierry Mandon,Mandon,"Secrétaire d'État à l'Enseignement supérieur et à la Recherche",1957-12-30,
-Ségolène Neuville,Neuville,"Secrétaire d'État aux Personnes handicapées et à la Lutte contre l'exclusion",1970-06-21,
-George Pau-Langevin,Pau-Langevin,"Ministre des Outre-mer",1948-10-19,
-Fleur Pellerin,Pellerin,"Ministre de la Culture et de la Communication",1973-08-29,
-Sylvia Pinel,Pinel,"Ministre du Logement, de l'Égalité des territoires et de la Ruralité",1977-09-28,
-Martine Pinville,Pinville,"Secrétaire d'État au Commerce, à l'Artisanat, à la Consommation, à l'Économie sociale et solidaire",1958-10-23,
-Laurence Rossignol,Rossignol,"Secrétaire d'État à la Famille, à l'Enfance, aux Personnes âgées et à l'Autonomie ",1957-12-22,
-Ségolène Royal,Royal,"Ministre de l'Écologie, du Développement durable et de l'Énergie",1953-09-22,
+Pascale Boistard,Boistard,"Secrétaire d'État aux Droits des femmes",1971-01-04,Pascaleboistard
+Thierry Braillard,Braillard,"Secrétaire d'État aux Sports",1964-01-24,Th_Braillard
+Bernard Cazeneuve,Cazeneuve,"Ministre de l'Intérieur",1963-06-02,BCazeneuve
+Harlem Désir,Désir,"Secrétaire d'État aux Affaires européennes",1959-11-25,harlemdesir
+Christian Eckert,Eckert,"Secrétaire d'État au Budget",1956-02-08,CECKERT56
+Myriam El Khomri,El Khomri,"Ministre du Travail, de l'Emploi, de la Formation professionnelle et du Dialogue social",1978-02-18,MyriamElKhomri
+Laurent Fabius,Fabius,"Ministre des Affaires étrangères et du Développement international",1946-08-20,LaurentFabius
+Matthias Fekl,Fekl,"Secrétaire d'État au Commerce extérieur, à la Promotion du tourisme et aux Français de l'étranger",1977-10-04,MatthiasFekl
+Annick Girardin,Girardin,"Secrétaire d'État au Développement et à la Francophonie",1964-08-03,AnnickGirardin
+François Hollande,Hollande,"Président de la République",1954-08-12,fhollande
+Patrick Kanner,Kanner,"Ministre de la Ville, de la Jeunesse et des Sports",1957-04-29,PatrickKanner
+Marylise Lebranchu,Lebranchu,"Ministre de la Décentralisation et de la Fonction publique",1947-04-25,mlebranchu
+Jean-Yves Le Drian,Le Drian,"Ministre de la Défense",1947-06-30,JY_LeDrian
+Stéphane Le Foll,Le Foll,"Ministre de l'Agriculture, de l'Agroalimentaire et de la Forêt, porte-parole du Gouvernement",1960-02-03,SLeFoll
+Jean-Marie Le Guen,Le Guen,"Secrétaire d'État aux Relations avec le Parlement",1953-01-03,jm_leguen
+Axelle Lemaire,Lemaire,"Secrétaire d'État au Numérique",1974-10-18,axellelemaire
+Emmanuel Macron,Macron,"Ministre de l'Économie, de l'Industrie et du Numérique",1977-12-21,EmmanuelMacron
+Thierry Mandon,Mandon,"Secrétaire d'État à l'Enseignement supérieur et à la Recherche",1957-12-30,mandonthierry
+Ségolène Neuville,Neuville,"Secrétaire d'État aux Personnes handicapées et à la Lutte contre l'exclusion",1970-06-21,s_neuville
+George Pau-Langevin,Pau-Langevin,"Ministre des Outre-mer",1948-10-19,Pau_Langevin
+Fleur Pellerin,Pellerin,"Ministre de la Culture et de la Communication",1973-08-29,fleurpellerin
+Sylvia Pinel,Pinel,"Ministre du Logement, de l'Égalité des territoires et de la Ruralité",1977-09-28,SylviaPinel
+Martine Pinville,Pinville,"Secrétaire d'État au Commerce, à l'Artisanat, à la Consommation, à l'Économie sociale et solidaire",1958-10-23,MartinePinville
+Laurence Rossignol,Rossignol,"Secrétaire d'État à la Famille, à l'Enfance, aux Personnes âgées et à l'Autonomie ",1957-12-22,laurossignol
+Ségolène Royal,Royal,"Ministre de l'Écologie, du Développement durable et de l'Énergie",1953-09-22,RoyalSegolene
 Michel Sapin,Sapin,"Ministre des Finances et des Comptes publics",1952-04-09,
-Christiane Taubira,Taubira,"Garde des Sceaux, ministre de la Justice",19523-02-02,
-Jean-Marc Todeschini,Todeschini,"Secrétaire d'État aux Anciens combattants et à la Mémoire",1952-03-12,
-Marisol Touraine,Touraine,"Ministre des Affaires sociales, de la Santé et des Droits des femmes",1959-03-07,
-Najat Vallaud-Belkacem,Vallaud-Belkacem,"Ministre de l'Éducation nationale, de l'Enseignement supérieur et de la Recherche",1977-10-04,
-André Vallini,Vallini,"Secrétaire d'État à la Réforme territoriale",1956-07-15,
-Manuel Valls,Valls,"Premier ministre",1962-08-13,
+Christiane Taubira,Taubira,"Garde des Sceaux, ministre de la Justice",19523-02-02,ChTaubira
+Jean-Marc Todeschini,Todeschini,"Secrétaire d'État aux Anciens combattants et à la Mémoire",1952-03-12,JM_Todeschini
+Marisol Touraine,Touraine,"Ministre des Affaires sociales, de la Santé et des Droits des femmes",1959-03-07,MarisolTouraine
+Najat Vallaud-Belkacem,Vallaud-Belkacem,"Ministre de l'Éducation nationale, de l'Enseignement supérieur et de la Recherche",1977-10-04,najatvb
+André Vallini,Vallini,"Secrétaire d'État à la Réforme territoriale",1956-07-15,VALLINIAndre
+Manuel Valls,Valls,"Premier ministre",1962-08-13,manuelvalls
 Clotilde Valter,Valter,"Secrétaire d'État à la Réforme de l'État et à la Simplification",1962-06-24,
-Alain Vidalies,Vidalies,"Secrétaire d'État aux Transports, à la Mer et à la Pêche",1951-03-17,
+Alain Vidalies,Vidalies,"Secrétaire d'État aux Transports, à la Mer et à la Pêche",1951-03-17,AVidalies
