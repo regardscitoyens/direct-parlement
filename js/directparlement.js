@@ -294,13 +294,18 @@
     row.replaceWith(ns.formatMProw(row.hasClass('odd'), ns.dep.id, ns.dep.display, '', '', true, rowid));
   };
 
+  ns.addRow = function(rowid){
+    var row = $('#' + rowid);
+    row.after(ns.formatMProw(row.hasClass('odd'), '', '&mdash;', '', '', true, rowid+"-"));
+  }
+
   ns.formatMProw = function(odd, pid, name, context, meta, qag, extra){
     var row = '<tr' + (extra ? ' id="' + extra + '"' : '') +
                   ' class="' + (odd ? 'odd' : '') + ' ' + (pid || qag ? 'clickable' : '') + '"',
         onclick = (pid ? ' onClick="directparl.displayMP(' + "'" + pid + "'" + ')"' : '' );
     if (qag)
       row += '><td colspan="3" ' + onclick + '>' + name + '</td>' +
-             '<td><button onClick="directparl.setQagMP(' + "'" + extra + "'" + ')">définir</button></td>';
+             '<td><button onClick="directparl.setQagMP(' + "'" + extra + "'" + ')">définir</button>&nbsp;&nbsp;&nbsp;<a onClick="directparl.addRow(' + "'" + extra + "'" + ')">⊞</a></td>';
     else
       row += onclick + '><td>' + name + '</td>' +
              '<td' + (context ? '>' + context + '</td><td' : ' colspan="2"') + '>' + meta + '</td>' +
