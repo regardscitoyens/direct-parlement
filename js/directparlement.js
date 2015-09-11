@@ -187,11 +187,11 @@
           ministre = {
             id: minid,
             nom: row[0],
-            nom_de_famille: row[0],
-            display: row[0] + " " + row[1],
-            fonction: row[1],
-            date_naissance: row[2],
-            twitter: row[3] || "",
+            nom_de_famille: row[1],
+            display: row[0] + " " + row[2],
+            fonction: row[2],
+            date_naissance: row[3],
+            twitter: row[4] || "",
             nb_mandats: 0,
             autres_mandats: []
           };
