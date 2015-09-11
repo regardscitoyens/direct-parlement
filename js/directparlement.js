@@ -297,8 +297,8 @@
 
   ns.formatMProw = function(odd, pid, name, context, meta, qag, extra){
     var row = '<tr' + (extra ? ' id="' + extra + '"' : '') +
-          (odd ? ' class="odd"' : '') + 
-          (pid ? ' style="cursor:pointer" onClick="directparl.displayMP(' + pid + ')"' : '' ) +
+                  ' class="' + (odd ? 'odd' : '') + ' ' + (pid || qag ? 'clickable' : '') + '"' +
+           (pid ? ' onClick="directparl.displayMP(' + pid + ')"' : '' ) +
               '>';
     if (qag)
       row += '<td colspan="3">' + name + '</td>' +
@@ -349,7 +349,7 @@
                 name = parls[0].label;
                 pid = parls[0].depid;
               }
-              if (pid != current){
+              if (pid != current || parl[7] === 'qag'){
                 current = pid;
                 odd = !odd;
               }
@@ -359,7 +359,7 @@
               }
               if (inscrit && parl[2]) inscrit = '';
               var meta = inscrit || parl[2] || (parl[9] ? parl[9].replace('cion', 'com') : '');
-              FJ += ns.formatMProw(odd, pid, name, context, meta, parl[7] == 'qag', (parl[11] || ''));
+              FJ += ns.formatMProw(odd, pid, name, context, meta, parl[7] === 'qag', (parl[11] || ''));
             };
 
           ns.pdfText.replace(/((S?\/?Adt n° \d+ (\([\w. ]+\) )?d[eu] )?(Gouvernement|M[.me]+) |TITRE|ARTICLE|AVANT|APRÈS|[\- ] |I[nN][sS][cC][rR][iI][tT])/g, '\n$1')
@@ -375,7 +375,7 @@
                 l.replace(/\.$/, '')
                 .split(';')
                 .forEach(function(gpe){
-                  add_FJ_line([,,,,,, gpe.trim(), 'qag',,,, "qag" + ++nqag]);
+                  add_FJ_line([,,,,,, gpe.trim(), 'qag',,,, 'qag' + ++nqag]);
                 });
               } else if (parl){
                 add_FJ_line(parl, true);
