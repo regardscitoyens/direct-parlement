@@ -24,6 +24,7 @@
     </div>
     <div id="right">
       <div id="title">
+        <button id="empty" onClick="directparl.emptyScreen()" title="Vider l'écran vert">écran vide</button>
         <a id="logo" target="_blank" href="http://www.RegardsCitoyens.org"><img src="logos/regardscitoyens.png" alt="RegardsCitoyens.org" title="Regards Citoyens"/></a>
         <h1>Direct Parlement <small>par <a href="http://www.RegardsCitoyens.org">Regards Citoyens</a></small></h1>
       </div>
@@ -32,7 +33,7 @@
         <div id="gouv" class="ui-widget">
           <label for="listministres">Ministres : </label>
           <select name="listministres" id="ministre" onChange="directparl.displayMinistre()">
-            <option id="noministre" value="" selected="selected"></option>
+            <option value=""></option>
           </select>
         </div>
         <div id="menu" class="ui-widget">

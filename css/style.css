@@ -89,10 +89,10 @@ h1 a, h1 a:visited, #linkFJ a, #linkFJ a:visited{
   height: 375px;
   overflow-y: auto;
 }
-#content, #FJloaded{
+#content, #FJloaded, #empty{
   display: none;
 }
-#linkFJ{
+#linkFJ, #empty{
   float: left;
   margin: -5px 0px 0px 10px;
 }
