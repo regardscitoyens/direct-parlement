@@ -1,7 +1,4 @@
-/* TODO
- - improve logos groupes
-*/
-(function (ns){
+(function(ns){
 
   ns.accentMap = {
     'á': 'a', 'à': 'a', 'â': 'a',
