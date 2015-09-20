@@ -273,8 +273,11 @@
       $('#groupe img').hide();
       $('#widget').attr('src', '');
     } else {
+      var duree = ns.annees(ns.dep.debut_mandat);
+      if (duree === "0 an") duree = "nouve" + (ns.dep.sexe === "F" ? "lle": "au") + " " + sexe.toLowerCase();
+      else duree = sexe.toLowerCase() + ' depuis ' + duree;
       $('#descr').text(sexe + ' ' + ns.departements[ns.dep.nom_circo] + ns.dep.nom_circo);
-      $('#details').html(ns.annees(ns.dep.date_naissance) + ' - ' + sexe.toLowerCase() + ' depuis ' + ns.annees(ns.dep.debut_mandat) + '<br>' + ns.dep.profession);
+      $('#details').html(ns.annees(ns.dep.date_naissance) + ' - ' + duree + '<br>' + ns.dep.profession);
       $('#groupe img').show();
       $('#groupe img').attr('src', 'logos/AN/' + ns.dep.groupe_sigle.toUpperCase() + '.png');
       $('#widget').attr('src', 'http://www.nosdeputes.fr/widget14/' + ns.dep.slug + '?iframe=true&width=950');
