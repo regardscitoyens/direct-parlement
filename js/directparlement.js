@@ -215,7 +215,7 @@
     
         $('#loader').hide();
         $('#content, #empty').show();
-        ns.randomMP();
+        ns.loadFJ();
       });
     });
   };
@@ -283,6 +283,9 @@
       $('#widget').attr('src', 'http://www.nosdeputes.fr/widget14/' + ns.dep.slug + '?iframe=true&width=950');
     }
     $("#metas, #groupe").show();
+    setTimeout(function(){
+      $("#widget, #autres").show();
+    }, 250);
   };
 
   ns.randomMP = function(){
@@ -291,8 +294,9 @@
   };
 
   ns.emptyScreen = function(){
+    ns.dep = null;
     $('#ministre').val('');
-    $("#metas, #groupe").hide();
+    $("#metas, #groupe, #widget, #autres").hide();
   };
 
   ns.setQagMP = function(rowid){
@@ -309,6 +313,7 @@
     var row = '<tr' + (extra ? ' id="' + extra + '"' : '') +
                   ' class="' + (odd ? 'odd' : '') + ' ' + (pid || qag ? 'clickable' : '') + '"',
         onclick = (pid ? ' onClick="directparl.displayMP(' + "'" + pid + "'" + ')"' : '' );
+    if (pid && !ns.dep) ns.displayMP(pid);
     if (qag)
       row += '><td colspan="3" ' + onclick + '>' + name + '</td>' +
              '<td><button onClick="directparl.setQagMP(' + "'" + extra + "'" + ')">définir</button>&nbsp;&nbsp;<a onClick="directparl.addRow(' + "'" + extra + "'" + ')">⊞</a></td>';
@@ -471,7 +476,6 @@
   $(document).ready(function(){
     ns.setResponsive();
     ns.downloadDeputes();
-    ns.loadFJ();
   });
 
 })(window.directparl = window.directparl || {});
