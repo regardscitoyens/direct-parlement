@@ -45,12 +45,14 @@
           <p id="loaderFJ">Chargement...</p>
           <div id="FJloaded">
             <button id="linkFJ" onClick="window.open('http://www.assemblee-nationale.fr/14/seance/feuille-jaune.pdf?refresh=true', '_blank')" title="Télécharger la feuille jaune">Télécharger</button>
-            <button id="testQAG" onClick="directparl.loadFJ('FJ_150715-15H00')">Test FJ QAG</button>
-            <button id="refreshFJ" onClick="directparl.loadFJ()" title="Rafraîchir la feuille jaune">Recharger</button>
+            <!--button id="testQAG" onClick="directparl.loadFJ('FJ_150715-15H00')">Test FJ QAG</button-->
+            <button id="loadTweetAN" onClick="directparl.openTweetAN()">Tweet AN<br/>liste #QAG</button>
+            <button id="refreshFJ" onClick="directparl.loadFJ()" title="Rafraîchir la feuille jaune">Recharger<br/>la FJ</button>
             <h3></h3>
             <table></table>
           </div>
         </div>
+        <div id="tweetAN"></div>
       </div>
     </div>
   </div>
@@ -61,6 +63,7 @@
   <script type="text/javascript" src="js/pdf-1.1.215.js"></script>
   <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
   <script type="text/javascript" src="js/jquery-ui-1.11.4.autocomplete.js"></script>
+  <script type="text/javascript" src="js/twitter.js"></script>
   <script type="text/javascript" src="js/directparlement.js"></script>
 </body>
 </html>

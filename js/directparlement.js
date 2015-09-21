@@ -433,6 +433,33 @@
     });
   };
  
+  ns.openTweetAN = function(){
+    $.get('http://www.nosdeputes.fr/feuille-jaune/last-tweet-QAG-AN.txt', function(tweetid){
+      var options = {
+        theme: 'light',
+        align: 'left',
+        lang: 'fr',
+        conversation: 'none',
+        width: $("tweetAN").width() - 5
+      }, div = document.getElementById("tweetAN"),
+      button = document.getElementById("loadTweetAN");
+      $(div).empty();
+      $("#FJ, #tweetAN").css('width', '50%');
+      $(button).attr("text", $(button).html());
+      $(button).html('Fermer<br/>le tweet');
+      button.onclick = ns.closeTweetAN;
+      window.twttr.widgets.createTweet(tweetid.trim(), div, options);
+    });
+  };
+
+  ns.closeTweetAN = function(){
+    var button = document.getElementById("loadTweetAN");
+    $(button).html($(button).attr("text"));
+    button.onclick = ns.openTweetAN;
+    $("#FJ").css('width', '100%');
+    $("#tweetAN").css('width', '0');
+  }
+
   ns.setResponsive = function(){
     $('#right').width($(window).width() - $('#incrust').width() - $('#right').css('padding-left').replace('px', '') - 3);
     $('#bottom').height($(window).height() - $('#top').height() - 3);
