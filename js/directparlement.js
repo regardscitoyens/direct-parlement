@@ -437,7 +437,7 @@
     $.get('http://www.nosdeputes.fr/feuille-jaune/last-tweet-QAG-AN.txt', function(tweetid){
       var options = {
         theme: 'light',
-        align: 'left',
+        align: 'center',
         lang: 'fr',
         conversation: 'none',
         width: $("tweetAN").width() - 5
