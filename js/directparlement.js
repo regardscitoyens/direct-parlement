@@ -180,15 +180,15 @@
         .forEach(function(row){
           if (!row.trim() || ~row.indexOf('nom')) return;
           row = row.split(';');
-          minid = "gouv-" + count++;
+          minid = 'gouv-' + count++;
           ministre = {
             id: minid,
             nom: row[0],
             nom_de_famille: row[1],
-            display: row[0] + " " + row[2],
+            display: row[0] + ' ' + row[2],
             fonction: row[2],
             date_naissance: row[3],
-            twitter: row[4] || "",
+            twitter: row[4] || '',
             nb_mandats: 0,
             autres_mandats: []
           };
@@ -274,7 +274,7 @@
       $('#widget').attr('src', '');
     } else {
       var duree = ns.annees(ns.dep.debut_mandat);
-      if (duree === "0 an") duree = "nouve" + (ns.dep.sexe === "F" ? "lle": "au") + " " + sexe.toLowerCase();
+      if (duree === '0 an') duree = 'nouve' + (ns.dep.sexe === 'F' ? 'lle': 'au') + ' ' + sexe.toLowerCase();
       else duree = sexe.toLowerCase() + ' depuis ' + duree;
       $('#descr').text(sexe + ' ' + ns.departements[ns.dep.nom_circo] + ns.dep.nom_circo);
       $('#details').html(ns.annees(ns.dep.date_naissance) + ' - ' + duree + '<br>' + ns.dep.profession);
@@ -282,9 +282,9 @@
       $('#groupe img').attr('src', 'logos/AN/' + ns.dep.groupe_sigle.toUpperCase() + '.png');
       $('#widget').attr('src', 'http://www.nosdeputes.fr/widget14/' + ns.dep.slug + '?iframe=true&width=950');
     }
-    $("#metas, #groupe").show();
+    $('#metas, #groupe').show();
     setTimeout(function(){
-      $("#widget, #autres").show();
+      $('#widget, #autres').show();
     }, 250);
   };
 
@@ -296,7 +296,7 @@
   ns.emptyScreen = function(){
     ns.dep = null;
     $('#ministre').val('');
-    $("#metas, #groupe, #widget, #autres").hide();
+    $('#metas, #groupe, #widget, #autres').hide();
   };
 
   ns.setQagMP = function(rowid){
@@ -306,7 +306,7 @@
 
   ns.addRow = function(rowid){
     var row = $('#' + rowid);
-    row.after(ns.formatMProw(row.hasClass('odd'), '', '&mdash;', '', '', true, rowid+"-"));
+    row.after(ns.formatMProw(row.hasClass('odd'), '', '&mdash;', '', '', true, rowid + '-'));
   }
 
   ns.formatMProw = function(odd, pid, name, context, meta, qag, extra){
@@ -349,8 +349,9 @@
               var pid = '',
                 name = parl[6] || parl[5],
                 parls = ns.matchDeputes(name);
-              if (!parls.length || name === "Gouvernement"){
-                if (check && name !== "Gouvernement") console.log('WARNING: could not find MP', parl);
+              if (!parls.length || name === 'Gouvernement'){
+                if (check && name !== 'Gouvernement')
+                  console.log('WARNING: could not find MP', parl);
               } else if (parls.length > 1){
                 var good = parls.filter(function(p){
                   return ~(ns.clean_accents(p.label.toLowerCase()).indexOf(' ' + ns.clean_accents(name.toLowerCase())));
@@ -403,7 +404,7 @@
                   if (~l.indexOf("l'")) readcontext = true;
                 }
               } else if (l.match(/^inscrit/i)){
-                inscrit = "inscrit";
+                inscrit = 'inscrit';
               } else if (l.match(/^- [A-ZÀÂÉÈÊËÎÏÔÖÙÛÜÇ]{3,}/) || (readtexte && l.match(/^([A-ZÀÂÉÈÊËÎÏÔÖÙÛÜÇ\- :,']+|\(.*\))$/))){
                 context = '';
                 inscrit = false;
@@ -440,17 +441,18 @@
  
   ns.openTweetAN = function(){
     $.get('http://www.nosdeputes.fr/feuille-jaune/last-tweet-QAG-AN.txt', function(tweetid){
-      var options = {
+      var div = document.getElementById('tweetAN'),
+       button = document.getElementById('loadTweetAN');
+       options = { 
         theme: 'light',
         align: 'center',
         lang: 'fr',
         conversation: 'none',
-        width: $("tweetAN").width() - 5
-      }, div = document.getElementById("tweetAN"),
-      button = document.getElementById("loadTweetAN");
+        width: $(div).width() - 5
+       };
       $(div).empty();
-      $("#FJ, #tweetAN").css('width', '50%');
-      $(button).attr("text", $(button).html());
+      $('#FJ, #tweetAN').css('width', '50%');
+      $(button).attr('text', $(button).html());
       $(button).html('Fermer<br/>le tweet');
       button.onclick = ns.closeTweetAN;
       window.twttr.widgets.createTweet(tweetid.trim(), div, options);
@@ -458,11 +460,11 @@
   };
 
   ns.closeTweetAN = function(){
-    var button = document.getElementById("loadTweetAN");
-    $(button).html($(button).attr("text"));
+    var button = document.getElementById('loadTweetAN');
+    $('#FJ').css('width', '100%');
+    $('#tweetAN').css('width', '0');
+    $(button).html($(button).attr('text'));
     button.onclick = ns.openTweetAN;
-    $("#FJ").css('width', '100%');
-    $("#tweetAN").css('width', '0');
   }
 
   ns.setResponsive = function(){
