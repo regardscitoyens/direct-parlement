@@ -335,7 +335,7 @@
         if (pageN < ns.pdf.numPages)
           ns.getPDFPages(pageN + 1);
         else {
-          var date = ns.pdfText.match(/LA SÉANCE (\S+ \d+ \S+ \d+ Séance de \d+ HEURES( \d+)?)/)[1],
+          var date = ns.pdfText.match(/LA SÉANCE (\S+ \d+[er]* \S+ \d+ Séance de \d+ HEURES( \d+)?)/),
             current = null,
             odd = false,
             texte = '',
@@ -417,7 +417,7 @@
                 //console.log(l);
               }
             });
-          $('#FJ h3').text(date);
+          $('#FJ h3').html("FEUILLE JAUNE" + (date ? " &mdash; " + date[1] : ''));
           $('#FJ table').html(FJ);
           $('#loaderFJ').hide();
           ns.setResponsive();
