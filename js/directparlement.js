@@ -476,6 +476,16 @@
   $(window).resize(ns.setResponsive);
 
   $(document).ready(function(){
+    $("#incrustColor").spectrum({
+      color: "#00C400",
+      chooseText: "OK",
+      cancelText: "",
+      clickoutFiresChange: true,
+      className: "full-spectrum",
+      move: function(color){
+        $('#incrust').css('background-color', color.toHexString());
+      }
+    });
     ns.setResponsive();
     ns.downloadDeputes();
   });

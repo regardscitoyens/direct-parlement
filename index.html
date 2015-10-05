@@ -8,6 +8,7 @@
   <link rel="shortcut icon" href="resources/favicon.png"/>
   <link rel="stylesheet" type="text/css" href="css/style.css"/>
   <link rel="stylesheet" type="text/css" href="css/jquery-ui-smoothness.css"/>
+  <link rel="stylesheet" type="text/css" href="css/spectrum.css"/>
 </head>
 <body>
   <div id="top">
@@ -24,7 +25,10 @@
     </div>
     <div id="right">
       <div id="title">
-        <button id="empty" onClick="directparl.emptyScreen()" title="Vider l'écran vert">écran vide</button>
+        <div id="commands">
+          <button id="empty" onClick="directparl.emptyScreen()" title="Vider l'écran vert">écran vide</button><br/>
+          <input type="text" id="incrustColor"></input>
+        </div>
         <a id="logo" target="_blank" href="http://www.RegardsCitoyens.org"><img src="logos/regardscitoyens.png" alt="RegardsCitoyens.org" title="Regards Citoyens"/></a>
         <h1>Direct Parlement <small>par <a href="http://www.RegardsCitoyens.org">Regards Citoyens</a> <span class="tiny"><a href="https://github.com/regardscitoyens/direct-parlement">(code-source)</a></span></small></h1>
       </div>
@@ -63,6 +67,7 @@
   <script type="text/javascript" src="js/pdf-1.1.215.js"></script>
   <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
   <script type="text/javascript" src="js/jquery-ui-1.11.4.autocomplete.js"></script>
+  <script type="text/javascript" src="js/spectrum.js"></script>
   <script type="text/javascript" src="js/twitter.js"></script>
   <script type="text/javascript" src="js/directparlement.js"></script>
 </body>

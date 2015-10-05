@@ -101,9 +101,20 @@ h1 span.tiny{
 #content, #FJloaded, #empty{
   display: none;
 }
-#linkFJ, #empty{
+#linkFJ, #commands{
   float: left;
   margin: -5px 0px 0px 10px;
+}
+.full-spectrum {
+  float: left;
+  margin: -5px 0px 0px 10px;
+}
+.full-spectrum .sp-preview {
+  height: 8px;
+}
+.full-spectrum .sp-dd {
+  height: 8px;
+  line-height: 8px;
 }
 #refreshFJ, #testQAG, #loadTweetAN{
   float: right;
