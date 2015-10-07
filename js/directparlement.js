@@ -178,7 +178,7 @@
         .replace(/"?,"?(\S)/g, ';$1')
         .split('\n')
         .forEach(function(row){
-          if (!row.trim() || ~row.indexOf('nom')) return;
+          if (!row.trim() || !row.indexOf('nom')) return;
           row = row.split(';');
           minid = 'gouv-' + count++;
           ministre = {
