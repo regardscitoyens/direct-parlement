@@ -163,7 +163,7 @@
   };
 
   ns.downloadDeputes = function(){
-    $.getJSON('http://www.nosdeputes.fr/deputes/enmandat/json', function(data){
+    $.getJSON('//www.nosdeputes.fr/deputes/enmandat/json', function(data){
       data.deputes.forEach(function(dep){
         var d = dep.depute;
         d.display = d.nom + ' (' + d.groupe_sigle + ')';
@@ -280,7 +280,7 @@
       $('#details').html(ns.annees(ns.dep.date_naissance) + ' - ' + duree + '<br>' + ns.dep.profession);
       $('#groupe img').show();
       $('#groupe img').attr('src', 'logos/AN/' + ns.dep.groupe_sigle.toUpperCase() + '.png');
-      $('#widget').attr('src', 'http://www.nosdeputes.fr/widget14/' + ns.dep.slug + '?iframe=true&width=950');
+      $('#widget').attr('src', '//www.nosdeputes.fr/widget14/' + ns.dep.slug + '?iframe=true&width=950');
     }
     $('#metas, #groupe').show();
     setTimeout(function(){
@@ -431,7 +431,7 @@
     FJ = FJ || 'last';
     $('#FJloaded').hide();
     $('#loaderFJ').show();
-    PDFJS.getDocument('http://www.nosdeputes.fr/feuille-jaune/' + FJ + '.pdf')
+    PDFJS.getDocument('//www.nosdeputes.fr/feuille-jaune/' + FJ + '.pdf')
     .then(function(pdf){
       ns.pdf = pdf;
       ns.pdfText = '';
@@ -440,7 +440,7 @@
   };
  
   ns.openTweetAN = function(){
-    $.get('http://www.nosdeputes.fr/feuille-jaune/last-tweet-QAG-AN.txt', function(tweetid){
+    $.get('//www.nosdeputes.fr/feuille-jaune/last-tweet-QAG-AN.txt', function(tweetid){
       var div = document.getElementById('tweetAN'),
        button = document.getElementById('loadTweetAN');
        options = { 
