@@ -41,9 +41,13 @@
           </select>
         </div>
         <div id="menu" class="ui-widget">
-          <label for="listdeputes">Chercher : </label>
-          <input id="listdeputes">
-          <button id="random" onClick="directparl.randomMP()">Au hasard</button>
+          Chercher
+          <label for="listdeputes">un député :</label>
+          <input class="listparls" id="listdeputes">
+          <button class="random" onClick="directparl.randomMP('deputes')">Au hasard</button>
+          <label for="listsenateurs">un sénateur :</label>
+          <input class="listparls" id="listsenateurs">
+          <button class="random" onClick="directparl.randomMP('senateurs')">Au hasard</button>
         </div>
         <div id="FJ">
           <p id="loaderFJ">Chargement...</p>
@@ -61,7 +65,7 @@
     </div>
   </div>
   <div id="bottom">
-    <iframe id="widget" frameborder="0" scrolling="no" src=""></iframe>
+    <iframe id="widget" frameborder="0" src=""></iframe>
     <div id="autres"></div>
   </div>
   <script type="text/javascript" src="js/pdf-1.1.215.js"></script>

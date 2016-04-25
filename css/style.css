@@ -71,7 +71,7 @@ h1 span.tiny{
   top: 0;
   right: 0;
 }
-#listdeputes{
+.listparls{
   width: 250px;
 }
 .ui-autocomplete{
@@ -82,7 +82,7 @@ h1 span.tiny{
 .ui-autocomplete li{
   font-size: 0.8em;
 }
-#random{
+.random{
   margin: 10px;
 }
 #FJ{

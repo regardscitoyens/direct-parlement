@@ -128,7 +128,7 @@
      "Vosges": "des ",
      "Wallis-et-Futuna": "de ",
      "Yonne": "de l'",
-     "Yvelines": "des"
+     "Yvelines": "des "
   };
 
   ns.datize = function(date_str){
@@ -141,33 +141,41 @@
     return (a.nom_de_famille > b.nom_de_famille ? 1 : -1)
   };
 
-  ns.deputes = {};
-  ns.deputesAr = [];
-  ns.matchDeputes = function(request, response){
-    var matcher = new RegExp($.ui.autocomplete.escapeRegex(ns.clean_accents(request.term || request)), 'i');
-    var res = $.grep(
-      ns.deputesAr.sort(ns.sort_by_name)
-      .map(function(d){
-        return {
-          label: d.display,
-          value: d.display,
-          depid: d.id
-        };
-      }),
-      function(d){
-        return matcher.test(ns.clean_accents(d.label));
-      }
-    );
-    if (response) response(res);
-    else return res;
+  ns.singleParl = function(type, sexe) {
+    return (type === "deputes" ? "Député" + (sexe === "F" ? "e" : "") : "Sénat" + (sexe === "F" ? "rice" : "eur"));
   };
 
-  ns.downloadDeputes = function(){
-    $.getJSON('//www.nosdeputes.fr/deputes/enmandat/json', function(data){
-      data.deputes.forEach(function(dep){
-        var d = dep.depute;
+  ns.deputes = {};
+  ns.deputesAr = [];
+  ns.senateurs = {};
+  ns.senateursAr = [];
+  ns.matchParls = function(type) {
+    return function(request, response){
+      var matcher = new RegExp($.ui.autocomplete.escapeRegex(ns.clean_accents(request.term || request)), 'i');
+      var res = $.grep(
+        ns[type+"Ar"].sort(ns.sort_by_name)
+        .map(function(d){
+          return {
+            label: d.display,
+            value: d.display,
+            parlid: d.id
+          };
+        }),
+        function(d){
+          return matcher.test(ns.clean_accents(d.label));
+        }
+      );
+      if (response) response(res);
+      else return res;
+    };
+  };
+
+  ns.downloadParls = function(type){
+    $.getJSON('//www.nos'+type+'.fr/'+type+'/enmandat/json', function(data){
+      data[type].forEach(function(parl){
+        var d = parl.depute || parl.senateur;
         d.display = d.nom + ' (' + d.groupe_sigle + ')';
-        ns.deputes[d.id] = d;
+        ns[type][d.id] = d;
       });
       $.get('resources/gouvernement.csv', function(gouvdata){
         var ministres = [],
@@ -192,7 +200,7 @@
             nb_mandats: 0,
             autres_mandats: []
           };
-          ns.deputes[minid] = ministre;
+          ns[type][minid] = ministre;
           ministres.push(ministre);
         });
 
@@ -201,21 +209,21 @@
           $('#ministre').append('<option value="' + m.id + '">' + m.display + '</option>');
         });
 
-        ns.deputesAr = Object.keys(ns.deputes).map(function(d){
-          return ns.deputes[d];
+        ns[type+"Ar"] = Object.keys(ns[type]).map(function(d){
+          return ns[type][d];
         });
-        $('#listdeputes').autocomplete({
-          source: ns.matchDeputes,
+        $('#list'+type).autocomplete({
+          source: ns.matchParls(type),
           select: function(event, ui){
             event.preventDefault();
             $('#ministre').val('');
-            ns.displayMP(ui.item.depid);
+            ns.displayMP(type, ui.item.parlid);
           }
         });
     
         $('#loader').hide();
         $('#content, #empty').show();
-        ns.loadFJ();
+        if (type === "deputes") ns.loadFJ();
       });
     });
   };
@@ -227,26 +235,26 @@
   };
 
   ns.displayMinistre = function(){
-    ns.displayMP($('#ministre').val());
+    ns.displayMP("deputes", $('#ministre').val());
   };
 
-  ns.displayMP = function(depid){
-    if (!depid || (ns.dep && depid === ns.dep.id)) return;
-    ns.dep = ns.deputes[depid];
-    var sexe = (ns.fonction ? ns.fonction : 'Député' + (ns.dep.sexe === 'F' ? 'e' : '')),
-      twitter = (ns.dep.twitter ? '@' + ns.dep.twitter : ''),
-      plural = (ns.dep.nb_mandats > 2 ? 's' : ''),
-      extra_mandats = (ns.dep.nb_mandats ? '<h2>A' + (ns.dep.nb_mandats > 1 ? '' : 'ucun a') + 'utre' + plural + ' mandat' + plural + (ns.dep.nb_mandats > 1 ? ' :</h2><ul>' : '</h2>') : '');
+  ns.displayMP = function(type, parlid){
+    if (!parlid || (ns.parl && parlid === ns.parl.id)) return;
+    ns.parl = ns[type][parlid];
+    var sexe = (ns.fonction ? ns.fonction : ns.singleParl(type, ns.sexe)),
+      twitter = (ns.parl.twitter ? '@' + ns.parl.twitter : ''),
+      plural = (ns.parl.nb_mandats > 2 ? 's' : ''),
+      extra_mandats = (ns.parl.nb_mandats ? '<h2>A' + (ns.parl.nb_mandats > 1 ? '' : 'ucun a') + 'utre' + plural + ' mandat' + plural + (ns.parl.nb_mandats > 1 ? ' :</h2><ul>' : '</h2>') : '');
 
-    ns.dep.autres_mandats.forEach(function(m){
+    ns.parl.autres_mandats.forEach(function(m){
       m = m['mandat'].split(' / ');
       var fonction = (/^(pr[eé]sid|maire)/i.test(m[2]) ? '<b>' + m[2] + '</b>' :  m[2]);
       extra_mandats += '<li>' + m[0] + ' &mdash; ' + m[1] + ' (' + fonction + ')</li>';
     });
-    if (ns.dep.nb_mandats > 1) extra_mandats += '</ul>'
-    if (!ns.dep.debut_mandat && !ns.dep.fonction) {
-      ns.dep.debut_mandat = ns.datize(ns.dep.mandat_debut);
-      ns.dep.anciens_mandats.filter(function(a){
+    if (ns.parl.nb_mandats > 1) extra_mandats += '</ul>'
+    if (!ns.parl.debut_mandat && !ns.parl.fonction) {
+      ns.parl.debut_mandat = ns.datize(ns.parl.mandat_debut);
+      ns.parl.anciens_mandats.filter(function(a){
         return a['mandat'].indexOf(' /  / ') === -1;
       }).map(function(a){
         return a['mandat']
@@ -258,29 +266,29 @@
       }).sort(function(a, b){
         return (a[0] < b[0] ? 1 : -1);
       }).forEach(function(a){
-        if ((ns.dep.debut_mandat - a[1])/86400000 < 65)
-          ns.dep.debut_mandat = a[0];
+        if ((ns.parl.debut_mandat - a[1])/86400000 < 65)
+          ns.parl.debut_mandat = a[0];
       });
     }
-    ns.dep.profession = (ns.dep.profession ? ns.dep.profession.replace('declare', 'déclaré').replace(/,.*$/, '') : 'Sans profession déclarée');
+    ns.parl.profession = (ns.parl.profession ? ns.parl.profession.replace('declare', 'déclaré').replace(/,.*$/, '') : 'Sans profession déclarée');
 
-    $('#name').text(ns.dep.nom);
+    $('#name').text(ns.parl.nom);
     $('#extra').html(twitter);
     $('#autres').html(extra_mandats);
-    if (ns.dep.fonction){
-      $('#descr').text(ns.dep.fonction);
-      $('#details').text(ns.annees(ns.dep.date_naissance));
+    if (ns.parl.fonction){
+      $('#descr').text(ns.parl.fonction);
+      $('#details').text(ns.annees(ns.parl.date_naissance));
       $('#groupe img').hide();
       $('#widget').attr('src', '');
     } else {
-      var duree = ns.annees(ns.dep.debut_mandat);
-      if (duree === '0 an') duree = 'nouve' + (ns.dep.sexe === 'F' ? 'lle': 'au') + ' ' + sexe.toLowerCase();
+      var duree = ns.annees(ns.parl.debut_mandat);
+      if (duree === '0 an') duree = 'nouve' + (ns.parl.sexe === 'F' ? 'lle': 'au') + ' ' + sexe.toLowerCase();
       else duree = sexe.toLowerCase() + ' depuis ' + duree;
-      $('#descr').text(sexe + ' ' + ns.departements[ns.dep.nom_circo] + ns.dep.nom_circo);
-      $('#details').html(ns.annees(ns.dep.date_naissance) + ' - ' + duree + '<br>' + ns.dep.profession);
+      $('#descr').text(sexe + ' ' + ns.departements[ns.parl.nom_circo] + ns.parl.nom_circo);
+      $('#details').html(ns.annees(ns.parl.date_naissance) + ' - ' + duree + '<br>' + ns.parl.profession);
       $('#groupe img').show();
-      $('#groupe img').attr('src', 'logos/AN/' + ns.dep.groupe_sigle.toUpperCase() + '.png');
-      $('#widget').attr('src', '//www.nosdeputes.fr/widget14/' + ns.dep.slug + '?iframe=true&width=950');
+      $('#groupe img').attr('src', 'logos/' + (type === "deputes" ? "AN" : "Senat") + '/' + ns.parl.groupe_sigle.toUpperCase() + '.png');
+      $('#widget').attr('src', (type === "deputes" ? '//www.nosdeputes.fr/widget14/' + ns.parl.slug + '?iframe=true&width=950' : ns.parl.url_nossenateurs.replace("http", "")));
     }
     $('#metas, #groupe').show();
     setTimeout(function(){
@@ -288,35 +296,35 @@
     }, 250);
   };
 
-  ns.randomMP = function(){
+  ns.randomMP = function(type){
     $('#ministre').val('');
-    ns.displayMP(Object.keys(ns.deputes)[parseInt(Math.random() * ns.deputesAr.length)]);
+    ns.displayMP(type, Object.keys(ns[type])[parseInt(Math.random() * ns[type+"Ar"].length)]);
   };
 
   ns.emptyScreen = function(){
-    ns.dep = null;
+    ns.parl = null;
     $('#ministre').val('');
     $('#metas, #groupe, #widget, #autres').hide();
   };
 
-  ns.setQagMP = function(rowid){
+  ns.setQagMP = function(type, rowid){
     var row = $('#' + rowid);
-    row.replaceWith(ns.formatMProw(row.hasClass('odd'), ns.dep.id, ns.dep.display, '', '', true, rowid));
+    row.replaceWith(ns.formatMProw(row.hasClass('odd'), type, ns.parl.id, ns.parl.display, '', '', true, rowid));
   };
 
-  ns.addRow = function(rowid){
+  ns.addRow = function(type, rowid){
     var row = $('#' + rowid);
-    row.after(ns.formatMProw(row.hasClass('odd'), '', '&mdash;', '', '', true, rowid + '-'));
+    row.after(ns.formatMProw(row.hasClass('odd'), type, '', '&mdash;', '', '', true, rowid + '-'));
   }
 
-  ns.formatMProw = function(odd, pid, name, context, meta, qag, extra){
+  ns.formatMProw = function(odd, type, pid, name, context, meta, qag, extra){
     var row = '<tr' + (extra ? ' id="' + extra + '"' : '') +
                   ' class="' + (odd ? 'odd' : '') + ' ' + (pid || qag ? 'clickable' : '') + '"',
-        onclick = (pid ? ' onClick="directparl.displayMP(' + "'" + pid + "'" + ')"' : '' );
-    if (pid && !ns.dep) ns.displayMP(pid);
+        onclick = (pid ? ' onClick="directparl.displayMP(' + "'" + type + "', '" + pid + "'" + ')"' : '' );
+    if (pid && !ns.parl) ns.displayMP(type, pid);
     if (qag)
       row += '><td colspan="3" ' + onclick + '>' + name + '</td>' +
-             '<td><button onClick="directparl.setQagMP(' + "'" + extra + "'" + ')">définir</button>&nbsp;&nbsp;<a onClick="directparl.addRow(' + "'" + extra + "'" + ')">⊞</a></td>';
+             '<td><button onClick="directparl.setQagMP(' + "'" + type + "', '" + extra + "'" + ')">définir</button>&nbsp;&nbsp;<a onClick="directparl.addRow(' + "'" + type + "', '" + extra + "'" + ')">⊞</a></td>';
     else
       row += onclick + '><td>' + name + '</td>' +
              '<td' + (context ? '>' + context + '</td><td' : ' colspan="2"') + '>' + meta + '</td>' +
@@ -348,7 +356,7 @@
               check = check || false;
               var pid = '',
                 name = parl[6] || parl[5],
-                parls = ns.matchDeputes(name);
+                parls = ns.matchParls("deputes")(name);
               if (!parls.length || name === 'Gouvernement'){
                 if (check && name !== 'Gouvernement')
                   console.log('WARNING: could not find MP', parl);
@@ -358,11 +366,11 @@
                 });
                 if (good && good.length === 1){
                   name = good[0].label;
-                  pid = good[0].depid;
+                  pid = good[0].parlid;
                 } else console.log('WARNING: multiple parls found for MP', parl, parls);
               } else {
                 name = parls[0].label;
-                pid = parls[0].depid;
+                pid = parls[0].parlid;
               }
               if (pid != current || parl[7] === 'qag'){
                 current = pid;
@@ -374,7 +382,7 @@
               }
               if (inscrit && parl[2]) inscrit = '';
               var meta = inscrit || parl[2] || (parl[9] ? parl[9].replace('cion', 'com') : '');
-              FJ += ns.formatMProw(odd, pid, name, context, meta, parl[7] === 'qag', (parl[11] || ''));
+              FJ += ns.formatMProw(odd, "deputes", pid, name, context, meta, parl[7] === 'qag', (parl[11] || ''));
             };
 
           ns.pdfText.replace(/((S?\/?Adt n° \d+ (\([\w. ]+\) )?d[eu] )?(Gouvernement|M[.me]+) |TITRE|ARTICLE|AVANT|APRÈS|[\- ] |I[nN][sS][cC][rR][iI][tT])/g, '\n$1')
@@ -487,7 +495,8 @@
       }
     });
     ns.setResponsive();
-    ns.downloadDeputes();
+    ns.downloadParls("deputes");
+    ns.downloadParls("senateurs");
   });
 
 })(window.directparl = window.directparl || {});
