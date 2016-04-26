@@ -240,6 +240,7 @@
 
   ns.displayMP = function(type, parlid){
     if (!parlid || (ns.parl && parlid === ns.parl.id)) return;
+    $('#cumul').hide();
     ns.parl = ns[type][parlid];
     var sexe = (ns.fonction ? ns.fonction : ns.singleParl(type, ns.sexe)),
       twitter = (ns.parl.twitter ? '@' + ns.parl.twitter : ''),
@@ -275,6 +276,7 @@
     $('#name').text(ns.parl.nom);
     $('#extra').html(twitter);
     $('#autres').html(extra_mandats);
+    if (/<b>/.test(extra_mandats)) $('#cumul').show();
     if (ns.parl.fonction){
       $('#descr').text(ns.parl.fonction);
       $('#details').text(ns.annees(ns.parl.date_naissance));
@@ -304,7 +306,7 @@
   ns.emptyScreen = function(){
     ns.parl = null;
     $('#ministre').val('');
-    $('#metas, #groupe, #widget, #autres').hide();
+    $('#metas, #groupe, #widget, #autres, #cumul').hide();
   };
 
   ns.setQagMP = function(type, rowid){
@@ -483,17 +485,23 @@
 
   $(window).resize(ns.setResponsive);
 
-  $(document).ready(function(){
-    $("#incrustColor").spectrum({
-      color: "#00C400",
+  ns.spectrum = function(inputid, divid, col0){
+    $("#"+inputid).spectrum({
+      color: col0,
       chooseText: "OK",
       cancelText: "",
       clickoutFiresChange: true,
       className: "full-spectrum",
       move: function(color){
-        $('#incrust').css('background-color', color.toHexString());
+        $('#'+divid).css('background-color', color.toHexString());
       }
     });
+  };
+     
+  $(document).ready(function(){
+    ns.spectrum("incrustColor", "incrust", "#00C400");
+    ns.spectrum("incrustWidget", "widget", "#FFFFFF");
+    ns.spectrum("incrustCumul", "cumul", "#00C400");
     ns.setResponsive();
     ns.downloadParls("deputes");
     ns.downloadParls("senateurs");
