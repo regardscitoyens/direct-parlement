@@ -485,17 +485,23 @@
 
   $(window).resize(ns.setResponsive);
 
-  $(document).ready(function(){
-    $("#incrustColor").spectrum({
-      color: "#00C400",
+  ns.spectrum = function(inputid, divid, col0){
+    $("#"+inputid).spectrum({
+      color: col0,
       chooseText: "OK",
       cancelText: "",
       clickoutFiresChange: true,
       className: "full-spectrum",
       move: function(color){
-        $('#incrust').css('background-color', color.toHexString());
+        $('#'+divid).css('background-color', color.toHexString());
       }
     });
+  };
+     
+  $(document).ready(function(){
+    ns.spectrum("incrustColor", "incrust", "#00C400");
+    ns.spectrum("incrustWidget", "widget", "#FFFFFF");
+    ns.spectrum("incrustCumul", "cumul", "#00C400");
     ns.setResponsive();
     ns.downloadParls("deputes");
     ns.downloadParls("senateurs");
