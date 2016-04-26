@@ -240,6 +240,7 @@
 
   ns.displayMP = function(type, parlid){
     if (!parlid || (ns.parl && parlid === ns.parl.id)) return;
+    $('#cumul').hide();
     ns.parl = ns[type][parlid];
     var sexe = (ns.fonction ? ns.fonction : ns.singleParl(type, ns.sexe)),
       twitter = (ns.parl.twitter ? '@' + ns.parl.twitter : ''),
@@ -275,6 +276,7 @@
     $('#name').text(ns.parl.nom);
     $('#extra').html(twitter);
     $('#autres').html(extra_mandats);
+    if (/<b>/.test(extra_mandats)) $('#cumul').show();
     if (ns.parl.fonction){
       $('#descr').text(ns.parl.fonction);
       $('#details').text(ns.annees(ns.parl.date_naissance));
@@ -304,7 +306,7 @@
   ns.emptyScreen = function(){
     ns.parl = null;
     $('#ministre').val('');
-    $('#metas, #groupe, #widget, #autres').hide();
+    $('#metas, #groupe, #widget, #autres, #cumul').hide();
   };
 
   ns.setQagMP = function(type, rowid){
