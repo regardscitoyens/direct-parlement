@@ -158,8 +158,8 @@ h1 span.tiny{
   height: 100%;
 }
 #cumul{
-  float: left;
-  margin: 15px;
+  float: right;
+  margin: 25px;
   background-color: rgb(0,196,0);
   display: none;
 }
