@@ -249,7 +249,8 @@
 
     ns.parl.autres_mandats.forEach(function(m){
       m = m['mandat'].split(' / ');
-      var fonction = (/^(pr[eé]sid|maire)/i.test(m[2]) ? '<b>' + m[2] + '</b>' :  m[2]);
+      var fct = m[2] || m [1],
+        fonction = (/^(pr[eé]sid|maire)/i.test(fct) ? '<b>' + fct + '</b>' :  fct);
       extra_mandats += '<li>' + m[0] + ' &mdash; ' + m[1] + ' (' + fonction + ')</li>';
     });
     if (ns.parl.nb_mandats > 1) extra_mandats += '</ul>'
