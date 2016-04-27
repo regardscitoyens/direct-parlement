@@ -307,7 +307,8 @@
   ns.emptyScreen = function(){
     ns.parl = null;
     $('#ministre').val('');
-    $('#metas, #groupe, #widget, #autres, #cumul img').hide();
+    $('#widget').attr('src', '');
+    $('#metas, #groupe, #autres, #cumul img').hide();
   };
 
   ns.setQagMP = function(type, rowid){
