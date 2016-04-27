@@ -159,9 +159,13 @@ h1 span.tiny{
 }
 #cumul{
   float: right;
-  margin: 25px;
   background-color: rgb(0,196,0);
+  width: 200px;
+  height: 200px;
+}
+#cumul img {
   display: none;
+  margin: 25px;
 }
 h2{
   font-size: 18px;

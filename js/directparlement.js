@@ -240,7 +240,7 @@
 
   ns.displayMP = function(type, parlid){
     if (!parlid || (ns.parl && parlid === ns.parl.id)) return;
-    $('#cumul').hide();
+    $('#cumul img').hide();
     ns.parl = ns[type][parlid];
     var sexe = (ns.fonction ? ns.fonction : ns.singleParl(type, ns.sexe)),
       twitter = (ns.parl.twitter ? '@' + ns.parl.twitter : ''),
@@ -276,7 +276,7 @@
     $('#name').text(ns.parl.nom);
     $('#extra').html(twitter);
     $('#autres').html(extra_mandats);
-    if (/<b>/.test(extra_mandats)) $('#cumul').show();
+    if (/<b>/.test(extra_mandats)) $('#cumul img').show();
     if (ns.parl.fonction){
       $('#descr').text(ns.parl.fonction);
       $('#details').text(ns.annees(ns.parl.date_naissance));
@@ -306,7 +306,7 @@
   ns.emptyScreen = function(){
     ns.parl = null;
     $('#ministre').val('');
-    $('#metas, #groupe, #widget, #autres, #cumul').hide();
+    $('#metas, #groupe, #widget, #autres, #cumul img').hide();
   };
 
   ns.setQagMP = function(type, rowid){
@@ -481,6 +481,7 @@
     $('#right').width($(window).width() - $('#incrust').width() - $('#right').css('padding-left').replace('px', '') - 3);
     $('#bottom').height($(window).height() - $('#top').height() - 3);
     $('#FJ').height($('#top').height() - $('h1').outerHeight() - 2 * $('h1').css('margin-top').replace(/px/, '') - $('#gouv').outerHeight() - $('#menu').outerHeight() - 3);
+    $('#autres').width($(window).width() - $('#widget').outerWidth() - $('#cumul').outerWidth() - 15);
   };
 
   $(window).resize(ns.setResponsive);
