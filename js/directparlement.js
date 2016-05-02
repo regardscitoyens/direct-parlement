@@ -282,17 +282,17 @@
     if (ns.parl.fonction){
       $('#descr').text(ns.parl.fonction);
       $('#details').text(ns.annees(ns.parl.date_naissance));
-      $('#groupe img').hide();
       $('#graph').attr('src', '');
+      $('#groupe img, graph').hide();
     } else {
       var duree = ns.annees(ns.parl.debut_mandat);
       if (duree === '0 an') duree = 'nouve' + (ns.parl.sexe === 'F' ? 'lle': 'au') + ' ' + sexe.toLowerCase();
       else duree = sexe.toLowerCase() + ' depuis ' + duree;
       $('#descr').text(sexe + ' ' + ns.departements[ns.parl.nom_circo] + ns.parl.nom_circo);
       $('#details').html(ns.annees(ns.parl.date_naissance) + ' - ' + duree + '<br>' + ns.parl.profession);
-      $('#groupe img').show();
       $('#groupe img').attr('src', 'logos/' + (type === "deputes" ? "AN" : "Senat") + '/' + ns.parl.groupe_sigle.toUpperCase() + '.png');
       $('#graph').attr('src', '//www.nos' + type + '.fr/' + ns.parl.slug + '/graphes/lastyear/total?questions=true&link=true&mapId=Map_' + ns.parl.slug + '_0.map');
+      $('#groupe img, #graph').show();
     }
     $('#metas, #groupe, #autres').show();
     if (/<b>/.test(extra_mandats)) $('#cumul img').show();
