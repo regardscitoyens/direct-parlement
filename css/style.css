@@ -82,15 +82,13 @@ body{
   display: none;
 }
 #widget{
+  clear: both;
   padding: 15px;
   float: left;
-  font-weight: bold;
-  font-size: 12px;
   width: 816px;
-  min-height: 150px;
+  height: 154px;
   border-top: 1px solid black;
   border-bottom: 1px solid black;
-  clear: both;
 }
 #widget img {
   display: none;
