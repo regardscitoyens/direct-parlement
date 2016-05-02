@@ -279,12 +279,11 @@
     $('#name').text(ns.parl.nom);
     $('#extra').html(twitter);
     $('#autres').html(extra_mandats);
-    if (/<b>/.test(extra_mandats)) $('#cumul img').show();
     if (ns.parl.fonction){
       $('#descr').text(ns.parl.fonction);
       $('#details').text(ns.annees(ns.parl.date_naissance));
       $('#groupe img').hide();
-      $('#widget').attr('src', '');
+      $('#graph').attr('src', '');
     } else {
       var duree = ns.annees(ns.parl.debut_mandat);
       if (duree === '0 an') duree = 'nouve' + (ns.parl.sexe === 'F' ? 'lle': 'au') + ' ' + sexe.toLowerCase();
@@ -293,12 +292,10 @@
       $('#details').html(ns.annees(ns.parl.date_naissance) + ' - ' + duree + '<br>' + ns.parl.profession);
       $('#groupe img').show();
       $('#groupe img').attr('src', 'logos/' + (type === "deputes" ? "AN" : "Senat") + '/' + ns.parl.groupe_sigle.toUpperCase() + '.png');
-      $('#widget').attr('src', '//www.nos' + type + '.fr/' + ns.parl.slug + '/graphes/lastyear/total?questions=true&link=true&mapId=Map_' + ns.parl.slug + '_0.map');
+      $('#graph').attr('src', '//www.nos' + type + '.fr/' + ns.parl.slug + '/graphes/lastyear/total?questions=true&link=true&mapId=Map_' + ns.parl.slug + '_0.map');
     }
-    $('#metas, #groupe').show();
-    setTimeout(function(){
-      $('#widget, #autres').show();
-    }, 250);
+    $('#metas, #groupe, #autres').show();
+    if (/<b>/.test(extra_mandats)) $('#cumul img').show();
   };
 
   ns.randomMP = function(type){
@@ -309,7 +306,7 @@
   ns.emptyScreen = function(){
     ns.parl = null;
     $('#ministre').val('');
-    $('#widget').attr('src', '');
+    $('#graph').attr('src', '');
     $('#metas, #groupe, #autres, #cumul img').hide();
   };
 

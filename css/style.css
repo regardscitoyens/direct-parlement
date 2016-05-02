@@ -145,12 +145,19 @@ h1 span.tiny{
   overflow-y: auto;
 }
 #widget{
-  padding-top: 15px;
-  padding-left: 15px;
+  padding: 15px;
   float: left;
+  font-weight: bold;
+  font-size: 12px;
   width: 815px;
-  min-height: 300px;
+  min-height: 150px;
   height: 100%;
+}
+#widget img.logo {
+  position: absolute;
+  top: 521px;
+  left: 756px;
+  width: 62px;
 }
 #autres{
   float: left;
