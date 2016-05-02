@@ -494,6 +494,8 @@
     $("#"+inputid).spectrum({
       color: col0,
       chooseText: "OK",
+      showInput: true,
+      preferredFormat: "hex3",
       cancelText: "",
       clickoutFiresChange: true,
       className: "full-spectrum",
