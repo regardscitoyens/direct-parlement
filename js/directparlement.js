@@ -205,10 +205,11 @@
           ministres.push(ministre);
         });
 
-        ministres.sort(ns.sort_by_name)
-        .forEach(function(m){
-          $('#ministre').append('<option value="' + m.id + '">' + m.display + '</option>');
-        });
+        if (type === "deputes")
+          ministres.sort(ns.sort_by_name)
+          .forEach(function(m){
+            $('#ministre').append('<option value="' + m.id + '">' + m.display + '</option>');
+          });
 
         ns[type+"Ar"] = Object.keys(ns[type]).map(function(d){
           return ns[type][d];
