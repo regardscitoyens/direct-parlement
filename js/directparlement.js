@@ -280,6 +280,7 @@
     $('#extra').html(twitter);
     $('#autres').html(extra_mandats);
     if (ns.parl.fonction){
+      $('#descr').addClass('gouv');
       $('#descr').text(ns.parl.fonction);
       $('#details').text(ns.annees(ns.parl.date_naissance));
       $('#graph').attr('src', '');
@@ -288,13 +289,14 @@
       var duree = ns.annees(ns.parl.debut_mandat);
       if (duree === '0 an') duree = 'nouve' + (ns.parl.sexe === 'F' ? 'lle': 'au') + ' ' + sexe.toLowerCase();
       else duree = sexe.toLowerCase() + ' depuis ' + duree;
+      $('#descr').removeClass('gouv');
       $('#descr').text(sexe + ' ' + ns.departements[ns.parl.nom_circo] + ns.parl.nom_circo);
       $('#details').html(ns.annees(ns.parl.date_naissance) + ' - ' + duree + '<br>' + ns.parl.profession);
       $('#groupe img').attr('src', 'logos/' + (type === "deputes" ? "AN" : "Senat") + '/' + ns.parl.groupe_sigle.toUpperCase() + '.png');
       $('#graph').attr('src', '//www.nos' + type + '.fr/' + ns.parl.slug + '/graphes/lastyear/total?questions=true&link=true&mapId=Map_' + ns.parl.slug + '_0.map');
       $('#groupe img, #graph, #widget img.logo').show();
     }
-    $('#metas, #groupe, #autres').show();
+    $('#text, #autres').show();
     if (/<b>/.test(extra_mandats)) $('#cumul img').show();
   };
 
@@ -307,7 +309,7 @@
     ns.parl = null;
     $('#ministre').val('');
     $('#graph').attr('src', '');
-    $('#metas, #groupe, #autres, #cumul img').hide();
+    $('#text, #autres, #groupe img, #cumul img, #graph').hide();
   };
 
   ns.setQagMP = function(type, rowid){
@@ -479,10 +481,9 @@
   }
 
   ns.setResponsive = function(){
+    $('#incrust').height($(window).height());
     $('#right').width($(window).width() - $('#incrust').width() - $('#right').css('padding-left').replace('px', '') - 3);
-    $('#bottom').height($(window).height() - $('#top').height() - 3);
-    $('#FJ').height($('#top').height() - $('h1').outerHeight() - 2 * $('h1').css('margin-top').replace(/px/, '') - $('#gouv').outerHeight() - $('#menu').outerHeight() - 3);
-    $('#autres').width($(window).width() - $('#widget').outerWidth() - $('#cumul').outerWidth() - 15);
+    $('#FJ, #tweetAN').height($(window).height() - $('h1').outerHeight() - 2 * $('h1').css('margin-top').replace(/px/, '') - $('#gouv').outerHeight() - $('#menu').outerHeight() - 3);
   };
 
   $(window).resize(ns.setResponsive);
@@ -494,7 +495,7 @@
         $('#'+divid).css('background-color', color.toHexString());
       };
     $('#'+divid).css('background-color', col);
-    $("#"+inputid).spectrum({
+    $("#"+inputid+" input").spectrum({
       color: col,
       chooseText: "OK",
       showInput: true,
@@ -508,9 +509,9 @@
   };
      
   $(document).ready(function(){
-    ns.spectrum("incrustColor", "incrust", "#00C400");
-    ns.spectrum("incrustWidget", "widget", "#FFFFFF");
-    ns.spectrum("incrustCumul", "cumul", "#00C400");
+    ns.spectrum("metasColor", "metas", "#00C400");
+    ns.spectrum("widgetColor", "widget", "#FFFFFF");
+    ns.spectrum("cumulColor", "cumul", "#00C400");
     ns.setResponsive();
     ns.downloadParls("deputes");
     ns.downloadParls("senateurs");

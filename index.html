@@ -11,65 +11,69 @@
   <link rel="stylesheet" type="text/css" href="css/spectrum.css"/>
 </head>
 <body>
-  <div id="top">
-    <div id="incrust">
-      <div id="metas">
+  <div id="incrust">
+    <div id="metas">
+      <div id="groupe">
+        <img src="">
+      </div>
+      <div id="text">
         <span id="name"></span><br/>
         <span id="descr"></span><br/>
         <span id="details"></span><br/>
         <span id="extra"></span>
       </div>
-      <div id="groupe">
-        <img src="">
-      </div>
     </div>
-    <div id="right">
-      <div id="title">
-        <div id="commands">
-          <button id="empty" onClick="directparl.emptyScreen()" title="Vider l'écran vert">écran vide</button><br/>
-          <input type="text" id="incrustColor"></input>
-          <input type="text" id="incrustWidget"></input>
-          <input type="text" id="incrustCumul"></input>
-        </div>
-        <a id="logo" target="_blank" href="http://www.RegardsCitoyens.org"><img src="logos/regardscitoyens.png" alt="RegardsCitoyens.org" title="Regards Citoyens"/></a>
-        <h1>Direct Parlement <small>par <a href="http://www.RegardsCitoyens.org">Regards Citoyens</a> <span class="tiny"><a href="https://github.com/regardscitoyens/direct-parlement">(code-source)</a></span></small></h1>
-      </div>
-      <p id="loader">Chargement...</p>
-      <div id="content">
-        <div id="gouv" class="ui-widget">
-          <label for="listministres">Ministres : </label>
-          <select name="listministres" id="ministre" onChange="directparl.displayMinistre()">
-            <option value=""></option>
-          </select>
-        </div>
-        <div id="menu" class="ui-widget">
-          Chercher
-          <label for="listdeputes">un député :</label>
-          <input class="listparls" id="listdeputes">
-          <button class="random" onClick="directparl.randomMP('deputes')">Au hasard</button>
-          <label for="listsenateurs">un sénateur :</label>
-          <input class="listparls" id="listsenateurs">
-          <button class="random" onClick="directparl.randomMP('senateurs')">Au hasard</button>
-        </div>
-        <div id="FJ">
-          <p id="loaderFJ">Chargement...</p>
-          <div id="FJloaded">
-            <button id="linkFJ" onClick="window.open('http://www.assemblee-nationale.fr/14/seance/feuille-jaune.pdf?refresh=true', '_blank')" title="Télécharger la feuille jaune">Télécharger</button>
-            <!--button id="testQAG" onClick="directparl.loadFJ('FJ_150715-15H00')">Test FJ QAG</button-->
-            <button id="loadTweetAN" onClick="directparl.openTweetAN()">Tweet AN<br/>liste #QAG</button>
-            <button id="refreshFJ" onClick="directparl.loadFJ()" title="Rafraîchir la feuille jaune">Recharger<br/>la FJ</button>
-            <h3></h3>
-            <table></table>
-          </div>
-        </div>
-        <div id="tweetAN"></div>
-      </div>
+    <div id="cumul">
+      <img src="logos/cumul.png" alt="cumul" width="150"/>
     </div>
-  </div>
-  <div id="bottom">
-    <div id="widget"><img id="graph" src=""/><img class="logo" src="logos/regardscitoyens.png"/></div>
+    <div id="widget">
+      <img id="graph" src=""/>
+      <img class="logo" src="logos/regardscitoyens.png"/>
+    </div>
     <div id="autres"></div>
-    <div id="cumul"><img src="logos/cumul.png" alt="cumul" width="150"/></div>
+    <div id="metasColor"><input type="text"></input></div>
+    <div id="cumulColor"><input type="text"></input></div>
+    <div id="widgetColor"><input type="text"></input></div>
+  </div>
+  <div id="right">
+    <div id="title">
+      <div id="commands">
+        <button id="empty" onClick="directparl.emptyScreen()" title="Vider l'écran vert">écran vide</button><br/>
+      </div>
+      <a id="logo" target="_blank" href="http://www.RegardsCitoyens.org"><img src="logos/regardscitoyens.png" alt="RegardsCitoyens.org" title="Regards Citoyens"/></a>
+      <h1>Direct Parlement <small>par <a href="http://www.RegardsCitoyens.org">Regards Citoyens</a> <span class="tiny"><a href="https://github.com/regardscitoyens/direct-parlement">(code-source)</a></span></small></h1>
+    </div>
+    <p id="loader">Chargement...</p>
+    <div id="content">
+      <div id="gouv" class="ui-widget">
+        <label for="listministres">Ministres : </label>
+        <select name="listministres" id="ministre" onChange="directparl.displayMinistre()">
+          <option value=""></option>
+        </select>
+      </div>
+      <div id="menu" class="ui-widget">
+        Chercher
+        <label for="listdeputes">un député :</label>
+        <input class="listparls" id="listdeputes">
+        <button class="random" onClick="directparl.randomMP('deputes')">Au hasard</button>
+        <br/>
+        <label for="listsenateurs">un sénateur :</label>
+        <input class="listparls" id="listsenateurs">
+        <button class="random" onClick="directparl.randomMP('senateurs')">Au hasard</button>
+      </div>
+      <div id="FJ">
+        <p id="loaderFJ">Chargement...</p>
+        <div id="FJloaded">
+          <button id="linkFJ" onClick="window.open('http://www.assemblee-nationale.fr/14/seance/feuille-jaune.pdf?refresh=true', '_blank')" title="Télécharger la feuille jaune">Télécharger</button>
+          <!--button id="testQAG" onClick="directparl.loadFJ('FJ_150715-15H00')">Test FJ QAG</button-->
+          <button id="loadTweetAN" onClick="directparl.openTweetAN()">Tweet AN<br/>liste #QAG</button>
+          <button id="refreshFJ" onClick="directparl.loadFJ()" title="Rafraîchir la feuille jaune">Recharger<br/>la FJ</button>
+          <h3></h3>
+          <table></table>
+        </div>
+      </div>
+      <div id="tweetAN"></div>
+    </div>
   </div>
   <script type="text/javascript" src="js/pdf-1.1.215.js"></script>
   <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
