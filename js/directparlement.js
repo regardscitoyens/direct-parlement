@@ -483,7 +483,7 @@
   ns.setResponsive = function(){
     $('#incrust').height($(window).height());
     $('#right').width($(window).width() - $('#incrust').width() - $('#right').css('padding-left').replace('px', '') - 3);
-    $('#FJ, #tweetAN').height($(window).height() - $('h1').outerHeight() - 2 * $('h1').css('margin-top').replace(/px/, '') - $('#gouv').outerHeight() - $('#menu').outerHeight() - 3);
+    $('#FJ, #tweetAN').height($(window).height() - $('h1').outerHeight() - 2 * $('h1').css('margin-top').replace(/px/, '') - $('#menu').outerHeight() - 10);
   };
 
   $(window).resize(ns.setResponsive);

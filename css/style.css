@@ -12,27 +12,27 @@ body{
 #metasColor{
   position: absolute;
   top: 0;
-  left: 595px;
+  left: 646px;
 }
 #cumulColor{
   position: absolute;
   top: 0;
-  left: 795px;
+  left: 796px;
 }
 #widgetColor{
   position: absolute;
   top: 200px;
-  left: 795px;
+  left: 796px;
 }
 #incrust{
   float: left;
-  width: 845px;
+  width: 846px;
   height: 100%;
   border-right: 1px solid black;
 }
 #metas{
   float: left;
-  width: 644px;
+  width: 695px;
   height: 200px;
 }
 #groupe{
@@ -51,7 +51,7 @@ body{
 }
 #text{
   float: left;
-  width: 475px;
+  max-width: 550px;
   padding-left: 5px;
   padding-top: 30px;
   font-family: sans-serif;
@@ -72,21 +72,21 @@ body{
 }
 #cumul{
   float: right;
-  background-color: rgb(0,196,0);
-  width: 200px;
+  width: 150px;
   height: 200px;
   border-left: 1px solid black;
+  text-align: center;
 }
 #cumul img {
+  padding-top: 47px;
   display: none;
-  margin: 25px;
 }
 #widget{
   padding: 15px;
   float: left;
   font-weight: bold;
   font-size: 12px;
-  width: 815px;
+  width: 816px;
   min-height: 150px;
   border-top: 1px solid black;
   border-bottom: 1px solid black;
@@ -102,11 +102,9 @@ body{
   width: 62px;
 }
 #autres{
-  padding-top: 10px;
   clear: both;
+  float: left;
   text-align: left;
-  min-height: 200px;
-  height: 100%;
 }
 h2{
   font-size: 18px;
@@ -118,6 +116,11 @@ h2{
   padding-left: 10px;
   height: 100%;
   overflow: hidden;
+}
+#menu{
+  font-size: 13px;
+  margin-top: -10px;
+  margin-bottom: 10px;
 }
 h1{
   font-size: 24px;
@@ -166,7 +169,10 @@ h1 span.tiny{
 #content, #FJloaded, #empty{
   display: none;
 }
-#linkFJ, #commands{
+#empty{
+  float: right;
+}
+#linkFJ{
   float: left;
   margin: -5px 0px 0px 10px;
 }

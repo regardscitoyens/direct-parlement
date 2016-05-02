@@ -31,26 +31,18 @@
       <img class="logo" src="logos/regardscitoyens.png"/>
     </div>
     <div id="autres"></div>
+    <button id="empty" onClick="directparl.emptyScreen()" title="Vider l'écran vert">écran vide</button><br/>
     <div id="metasColor"><input type="text"></input></div>
     <div id="cumulColor"><input type="text"></input></div>
     <div id="widgetColor"><input type="text"></input></div>
   </div>
   <div id="right">
     <div id="title">
-      <div id="commands">
-        <button id="empty" onClick="directparl.emptyScreen()" title="Vider l'écran vert">écran vide</button><br/>
-      </div>
       <a id="logo" target="_blank" href="http://www.RegardsCitoyens.org"><img src="logos/regardscitoyens.png" alt="RegardsCitoyens.org" title="Regards Citoyens"/></a>
       <h1>Direct Parlement <small>par <a href="http://www.RegardsCitoyens.org">Regards Citoyens</a> <span class="tiny"><a href="https://github.com/regardscitoyens/direct-parlement">(code-source)</a></span></small></h1>
     </div>
     <p id="loader">Chargement...</p>
     <div id="content">
-      <div id="gouv" class="ui-widget">
-        <label for="listministres">Ministres : </label>
-        <select name="listministres" id="ministre" onChange="directparl.displayMinistre()">
-          <option value=""></option>
-        </select>
-      </div>
       <div id="menu" class="ui-widget">
         Chercher
         <label for="listdeputes">un député :</label>
@@ -60,6 +52,11 @@
         <label for="listsenateurs">un sénateur :</label>
         <input class="listparls" id="listsenateurs">
         <button class="random" onClick="directparl.randomMP('senateurs')">Au hasard</button>
+        <br/>
+        <label for="listministres">Ministres : </label>
+        <select name="listministres" id="ministre" onChange="directparl.displayMinistre()">
+          <option value=""></option>
+        </select>
       </div>
       <div id="FJ">
         <p id="loaderFJ">Chargement...</p>
