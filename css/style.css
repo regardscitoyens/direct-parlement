@@ -145,9 +145,10 @@ h1 span.tiny{
   overflow-y: auto;
 }
 #widget{
-  padding-left: 25px;
+  padding-top: 15px;
+  padding-left: 15px;
   float: left;
-  width: 1000px;
+  width: 815px;
   min-height: 300px;
   height: 100%;
 }

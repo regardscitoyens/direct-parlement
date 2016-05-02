@@ -293,7 +293,7 @@
       $('#details').html(ns.annees(ns.parl.date_naissance) + ' - ' + duree + '<br>' + ns.parl.profession);
       $('#groupe img').show();
       $('#groupe img').attr('src', 'logos/' + (type === "deputes" ? "AN" : "Senat") + '/' + ns.parl.groupe_sigle.toUpperCase() + '.png');
-      $('#widget').attr('src', (type === "deputes" ? '//www.nosdeputes.fr/widget14/' + ns.parl.slug + '?iframe=true&width=950' : ns.parl.url_nossenateurs.replace(/^https?:/, "")));
+      $('#widget').attr('src', '//www.nos' + type + '.fr/' + ns.parl.slug + '/graphes/lastyear/total?questions=true&link=true&mapId=Map_' + ns.parl.slug + '_0.map');
     }
     $('#metas, #groupe').show();
     setTimeout(function(){
