@@ -154,6 +154,9 @@ h1 span.tiny{
   min-height: 150px;
   height: 100%;
 }
+#widget img {
+  display: none;
+}
 #widget img.logo {
   position: absolute;
   top: 521px;
