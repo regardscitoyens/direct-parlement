@@ -47,6 +47,7 @@ body{
   height: 100px;
   border: solid 1px #333;
   border-radius: 33%;
+  display: none;
 }
 #right{
   float: left;

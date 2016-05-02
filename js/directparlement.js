@@ -283,7 +283,7 @@
       $('#descr').text(ns.parl.fonction);
       $('#details').text(ns.annees(ns.parl.date_naissance));
       $('#graph').attr('src', '');
-      $('#groupe img, graph').hide();
+      $('#groupe img, #graph').hide();
     } else {
       var duree = ns.annees(ns.parl.debut_mandat);
       if (duree === '0 an') duree = 'nouve' + (ns.parl.sexe === 'F' ? 'lle': 'au') + ' ' + sexe.toLowerCase();
