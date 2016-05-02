@@ -184,6 +184,7 @@
           ministre = {};
         gouvdata.replace(/(^"|"$)/g, '')
         .replace(/"?,"?(\S)/g, ';$1')
+        .replace(/,(\n|$)/g, ';$1')
         .split('\n')
         .forEach(function(row){
           if (!row.trim() || !row.indexOf('nom')) return;
