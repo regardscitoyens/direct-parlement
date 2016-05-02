@@ -488,7 +488,11 @@
   $(window).resize(ns.setResponsive);
 
   ns.spectrum = function(inputid, divid, col0){
-    var col = localStorage.getItem("directParlement-"+inputid) || col0;
+    var col = localStorage.getItem("directParlement-"+inputid) || col0,
+      updateColor = function(color){
+        localStorage.setItem("directParlement-"+inputid, color.toHexString());
+        $('#'+divid).css('background-color', color.toHexString());
+      };
     $('#'+divid).css('background-color', col);
     $("#"+inputid).spectrum({
       color: col,
@@ -498,10 +502,8 @@
       cancelText: "",
       clickoutFiresChange: true,
       className: "full-spectrum",
-      move: function(color){
-        localStorage.setItem("directParlement-"+inputid, color.toHexString());
-        $('#'+divid).css('background-color', color.toHexString());
-      }
+      move: updateColor,
+      change: updateColor
     });
   };
      
