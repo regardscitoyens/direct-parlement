@@ -491,8 +491,10 @@
   $(window).resize(ns.setResponsive);
 
   ns.spectrum = function(inputid, divid, col0){
+    var col = localStorage.getItem("directParlement-"+inputid) || col0;
+    $('#'+divid).css('background-color', col);
     $("#"+inputid).spectrum({
-      color: col0,
+      color: col,
       chooseText: "OK",
       showInput: true,
       preferredFormat: "hex3",
@@ -500,6 +502,7 @@
       clickoutFiresChange: true,
       className: "full-spectrum",
       move: function(color){
+        localStorage.setItem("directParlement-"+inputid, color.toHexString());
         $('#'+divid).css('background-color', color.toHexString());
       }
     });
