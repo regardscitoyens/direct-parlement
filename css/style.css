@@ -160,6 +160,9 @@ h1 span.tiny{
   left: 756px;
   width: 62px;
 }
+#graph {
+  display: none;
+}
 #autres{
   float: left;
   text-align: left;
