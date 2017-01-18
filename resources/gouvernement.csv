@@ -1,7 +1,7 @@
 nom,nom_de_famille,fonction,date_naissance,twitter
 Pascale Boistard,Boistard,"Secrétaire d'État chargée des Personnes âgées et de l'Autonomie",1971-01-04,Pascaleboistard
 Thierry Braillard,Braillard,"Secrétaire d'État aux Sports",1964-01-24,Th_Braillard
-Bernard Cazeneuve,Cazeneuve,"Ministre de l'Intérieur",1963-06-02,BCazeneuve
+Bruno Le Roux,Le Roux,"Ministre de l'Intérieur",1965-05-02,BrunoLeRoux
 Harlem Désir,Désir,"Secrétaire d'État aux Affaires européennes",1959-11-25,harlemdesir
 Christian Eckert,Eckert,"Secrétaire d'État au Budget et aux Comptes publics",1956-02-08,CECKERT56
 Myriam El Khomri,El Khomri,"Ministre du Travail, de l'Emploi, de la Formation professionnelle et du Dialogue social",1978-02-18,MyriamElKhomri
@@ -12,7 +12,7 @@ François Hollande,Hollande,"Président de la République",1954-08-12,fhollande
 Patrick Kanner,Kanner,"Ministre de la Ville, de la Jeunesse et des Sports",1957-04-29,PatrickKanner
 Jean-Yves Le Drian,Le Drian,"Ministre de la Défense",1947-06-30,JY_LeDrian
 Stéphane Le Foll,Le Foll,"Ministre de l'Agriculture, de l'Agroalimentaire et de la Forêt, porte-parole du Gouvernement",1960-02-03,SLeFoll
-Jean-Marie Le Guen,Le Guen,"Secrétaire d'État aux Relations avec le Parlement",1953-01-03,jm_leguen
+Jean-Marie Le Guen,Le Guen,"Secrétaire d'État au développement et à la francophonie",1953-01-03,jm_leguen
 Axelle Lemaire,Lemaire,"Secrétaire d'État au Numérique et à l'Innovation",1974-10-18,axellelemaire
 Christophe Sirugue,"Secrétaire d'État à l'Industrie",1966-08-14,chsirugue
 Thierry Mandon,Mandon,"Secrétaire d'État à l'Enseignement supérieur et à la Recherche",1957-12-30,mandonthierry
@@ -26,8 +26,8 @@ Jean-Jacques Urvoas,Urvoas,"Garde des Sceaux, ministre de la Justice",1959-09-19
 Jean-Marc Todeschini,Todeschini,"Secrétaire d'État aux Anciens combattants et à la Mémoire",1952-03-12,JM_Todeschini
 Marisol Touraine,Touraine,"Ministre des Affaires sociales et de la Santé",1959-03-07,MarisolTouraine
 Najat Vallaud-Belkacem,Vallaud-Belkacem,"Ministre de l'Éducation nationale, de l'Enseignement supérieur et de la Recherche",1977-10-04,najatvb
-André Vallini,Vallini,"Secrétaire d'État au Développement et à la Francophonie",1956-07-15,VALLINIAndre
-Manuel Valls,Valls,"Premier ministre",1962-08-13,manuelvalls
+André Vallini,Vallini,"Secrétaire d'État aux relations avec le Parlement",1956-07-15,VALLINIAndre
+Bernard Cazeneuve,Cazeneuve,"Premier ministre",1963-06-02,BCazeneuve
 Clotilde Valter,Valter,"Secrétaire d'État à la Formation professionnelle et à l'Apprentissage",1962-06-24,ClotildeVALTER
 Alain Vidalies,Vidalies,"Secrétaire d'État aux Transports, à la Mer et à la Pêche",1951-03-17,AVidalies
 Emmanuelle Cosse,Cosse,"Ministre du Logement et de l'Habitat durable",1974-11-15,emmacosse
