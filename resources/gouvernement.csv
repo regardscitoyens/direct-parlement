@@ -1,40 +1,25 @@
 nom,nom_de_famille,fonction,date_naissance,twitter
-Pascale Boistard,Boistard,"Secrétaire d'État chargée des Personnes âgées et de l'Autonomie",1971-01-04,Pascaleboistard
-Thierry Braillard,Braillard,"Secrétaire d'État aux Sports",1964-01-24,Th_Braillard
-Bruno Le Roux,Le Roux,"Ministre de l'Intérieur",1965-05-02,BrunoLeRoux
-Harlem Désir,Désir,"Secrétaire d'État aux Affaires européennes",1959-11-25,harlemdesir
-Christian Eckert,Eckert,"Secrétaire d'État au Budget et aux Comptes publics",1956-02-08,CECKERT56
-Myriam El Khomri,El Khomri,"Ministre du Travail, de l'Emploi, de la Formation professionnelle et du Dialogue social",1978-02-18,MyriamElKhomri
-Jean-Marc Ayrault,Ayrault,"Ministre des Affaires étrangères et du Développement international",1950-01-25,jeanmarcayrault
-Matthias Fekl,Fekl,"Secrétaire d'État au Commerce extérieur, à la Promotion du tourisme et aux Français de l'étranger",1977-10-04,MatthiasFekl
-Annick Girardin,Girardin,"Ministre de la Fonction publique",1964-08-03,AnnickGirardin
-François Hollande,Hollande,"Président de la République",1954-08-12,fhollande
-Patrick Kanner,Kanner,"Ministre de la Ville, de la Jeunesse et des Sports",1957-04-29,PatrickKanner
-Jean-Yves Le Drian,Le Drian,"Ministre de la Défense",1947-06-30,JY_LeDrian
-Stéphane Le Foll,Le Foll,"Ministre de l'Agriculture, de l'Agroalimentaire et de la Forêt, porte-parole du Gouvernement",1960-02-03,SLeFoll
-Jean-Marie Le Guen,Le Guen,"Secrétaire d'État au développement et à la francophonie",1953-01-03,jm_leguen
-Axelle Lemaire,Lemaire,"Secrétaire d'État au Numérique et à l'Innovation",1974-10-18,axellelemaire
-Christophe Sirugue,Sirugue,"Secrétaire d'État à l'Industrie",1966-08-14,chsirugue
-Thierry Mandon,Mandon,"Secrétaire d'État à l'Enseignement supérieur et à la Recherche",1957-12-30,mandonthierry
-Ségolène Neuville,Neuville,"Secrétaire d'État aux Personnes handicapées et à la Lutte contre l'exclusion",1970-06-21,s_neuville
-Audrey Azoulay,Azoulay,"Ministre de la Culture et de la Communication",1972-08-04,AAzoulay
-Martine Pinville,Pinville,"Secrétaire d'État au Commerce, à l'Artisanat, à la Consommation, à l'Économie sociale et solidaire",1958-10-23,MartinePinville
-Laurence Rossignol,Rossignol,"Ministre de la Famille, de l'Enfance et des Droits des femmes",1957-12-22,laurossignol
-Ségolène Royal,Royal,"Ministre de l'Environnement de l'Énergie et de la Mer, chargée des Relations internationales sur le climat",1953-09-22,RoyalSegolene
-Michel Sapin,Sapin,"Ministre de l'Économie et des Finances",1952-04-09,MichelSapin
-Jean-Jacques Urvoas,Urvoas,"Garde des Sceaux, ministre de la Justice",1959-09-19,JJurvoas
-Jean-Marc Todeschini,Todeschini,"Secrétaire d'État aux Anciens combattants et à la Mémoire",1952-03-12,JM_Todeschini
-Marisol Touraine,Touraine,"Ministre des Affaires sociales et de la Santé",1959-03-07,MarisolTouraine
-Najat Vallaud-Belkacem,Vallaud-Belkacem,"Ministre de l'Éducation nationale, de l'Enseignement supérieur et de la Recherche",1977-10-04,najatvb
-André Vallini,Vallini,"Secrétaire d'État aux relations avec le Parlement",1956-07-15,VALLINIAndre
-Bernard Cazeneuve,Cazeneuve,"Premier ministre",1963-06-02,BCazeneuve
-Clotilde Valter,Valter,"Secrétaire d'État à la Formation professionnelle et à l'Apprentissage",1962-06-24,ClotildeVALTER
-Alain Vidalies,Vidalies,"Secrétaire d'État aux Transports, à la Mer et à la Pêche",1951-03-17,AVidalies
-Emmanuelle Cosse,Cosse,"Ministre du Logement et de l'Habitat durable",1974-11-15,emmacosse
-Jean-Vincent Placé,Placé,"Secrétaire d'État à la Réforme de l'État et à la Simplification",1968-03-12,JVPlace
-Barbara Pompili,Pompili,"Secrétaire d'État chargée des Relations internationales sur le climat, et de la Biodiversité",1975-06-13,barbarapompili
-Jean-Michel Baylet,Baylet,"Ministre de l’Aménagement du territoire, de la Ruralité et des Collectivités territoriales",1946-11-17,JMBaylet
-Juliette Méadel,Méadel,"Secrétaire d’État à l’Aide aux victimes",1974-04-17,juliettemeadel
-Ericka Bareigts,Bareigts,"Ministre des Outre-mer",1967-04-16,ebareigts
-Estelle Grelier,Grelier,"Secrétaire d’État aux Collectivités territoriales",1973-06-22,estellegrelier
-Hélène Geoffroy,Geoffroy,"Secrétaire d’État à la Ville",1970-03-04,HeleneGeoffroy
+Emmanuel Macron,Macron,Président de la République,1977-12-21,EmmanuelMacron
+Édouard Philippe,Philippe,Premier ministre,1970-11-28,EPhilippePM
+Gérard Collomb,Collomb,"Ministre d'État, Ministre de l'Intérieur",1947-06-20,gerardcollomb
+Nicolas Hulot,Hulot,"Ministre d'État, Ministre de la Transition écologique et solidaire",1955-04-30,N_Hulot
+François Bayrou,Bayrou,"Ministre d'État, Garde des Sceaux, Ministre de la Justice",1951-05-25,bayrou
+Sylvie Goulard,Goulard,Ministre des Armées,1964-12-04,GoulardSylvie
+Jean-Yves Le Drian,Le Drian,Ministre de l'Europe et des Affaires étrangères,1947-06-30,JY_LeDrian
+Richard Ferrand,Ferrand,Ministre de la Cohésion des territoires,1962-07-01,RichardFerrand
+Agnès Buzyn,Buzyn,Ministre des Solidarités et de la Santé,1962-11-01,AgnesBuzyn
+Françoise Nyssen,Nyssen,Ministre de la Culture,1951-06-09,FrancoiseNyssen
+Bruno Le Maire,Le Maire,Ministre de l'Économie,1969-04-15,BrunoLeMaire
+Muriel Penicaud,Penicaud,Ministre du Travail,1955-03-31,murielpenicaud
+Jean-Michel Blanquer,Blanquer,Ministre de l'Éducation nationale,1964-12-04,jmblanquer
+Jacques Mézard,Mézard,Ministre de l'Agriculture et de l'Alimentation,1947-12-03,MezardJacques
+Gérald Darmanin,Darmanin,Ministre de l'Action et des Comptes publics,1982-10-11,GDarmanin
+Frédérique Vidal,Vidal,"Ministre de l'Enseignement supérieur, de la Recherche et de l'Innovation",1964-05-06,VidalFrederique
+Annick Girardin,Girardin,Ministre des Outre mer,1964-08-03,AnnickGirardin
+Laura Flessel,Flessel,Ministre des Sports,1971-11-06,FlesselLaura
+Élisabeth Borne,Borne,"Ministre auprès du Ministre de la Transition écologique et solidaire, chargée des Transports",1961-04-18,Elisabeth_Borne
+Marielle De Sarnez,De Sarnez,"Ministre auprès du Ministre de l'Europe et des Affaires étrangères, chargée des Affaires européennes",1951-03-27,desarnez
+Christophe Castaner,Castaner,Secrétaire d'État chargé des Relations avec le Parlement. Porte-parole du Gouvernement,1966-01-03,CCastaner
+Marlène Schiappa,Schiappa,Secrétaire d'État chargée de l'Égalité entre les femmes et les hommes,1982-11-18,MarleneSchiappa
+Sophie Cluzel,Cluzel,Secrétaire d'État chargée des Personnes handicapées,1961-01-07,sophcluz
+Mounir Mahjoubi,Mahjoubi,Secrétaire d'État chargé du Numérique,1984-03-01,mounir
