@@ -444,7 +444,7 @@
     FJ = FJ || 'last';
     $('#FJloaded').hide();
     $('#loaderFJ').show();
-    PDFJS.getDocument('//www.nosdeputes.fr/feuille-jaune/' + FJ + '.pdf')
+    PDFJS.getDocument('//2012-2017.nosdeputes.fr/feuille-jaune/' + FJ + '.pdf')
     .then(function(pdf){
       ns.pdf = pdf;
       ns.pdfText = '';
@@ -453,7 +453,7 @@
   };
  
   ns.openTweetAN = function(){
-    $.get('//www.nosdeputes.fr/feuille-jaune/last-tweet-QAG-AN.txt', function(tweetid){
+    $.get('//2012-2017.nosdeputes.fr/feuille-jaune/last-tweet-QAG-AN.txt', function(tweetid){
       var div = document.getElementById('tweetAN'),
        button = document.getElementById('loadTweetAN');
        options = { 
