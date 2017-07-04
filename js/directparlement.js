@@ -441,7 +441,7 @@
   };
 
   ns.loadFJ = function(FJ){
-    FJ = FJ || 'last';
+    FJ = FJ || 'new';
     $('#FJloaded').hide();
     $('#loaderFJ').show();
     PDFJS.getDocument('//2012-2017.nosdeputes.fr/feuille-jaune/' + FJ + '.pdf')
