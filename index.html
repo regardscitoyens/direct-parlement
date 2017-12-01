@@ -24,7 +24,12 @@
       </div>
     </div>
     <div id="cumul">
-      <img src="logos/cumul.png" alt="cumul" width="150"/>
+      <div id="mapcontainer">
+        <div class="map">
+          <span>Map not loaded</span>
+        </div>
+      </div>
+      <button id="resetMap" onclick="resetMap()">Reset</button>
     </div>
     <div id="widget">
       <img id="graph" src=""/>
@@ -78,5 +83,9 @@
   <script type="text/javascript" src="js/spectrum.js"></script>
   <script type="text/javascript" src="js/twitter.js"></script>
   <script type="text/javascript" src="js/directparlement.js"></script>
+  <script type="text/javascript" src="js/raphael.min.js"></script>
+  <script type="text/javascript" src="js/jquery.mapael.min.js"></script>
+  <script type="text/javascript" src="js/maps/france_circonscriptions.js"></script>
+  <script type="text/javascript" src="js/map.js"></script>
 </body>
 </html>
