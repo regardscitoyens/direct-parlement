@@ -171,7 +171,8 @@
   };
 
   ns.downloadParls = function(type){
-    $.getJSON('//www.nos'+type+'.fr/'+type+'/enmandat/json', function(data){
+      $.getJSON('//www.nos'+type+'.fr/'+type+'/enmandat/json', function(data){
+      //$.getJSON('./nosdeputes.fr_deputes_en_mandat_2017-12-01.json', function(data){
       data[type].forEach(function(parl){
         var d = parl.depute || parl.senateur;
         d.display = d.nom + ' (' + d.groupe_sigle + ')';
@@ -275,6 +276,9 @@
       });
     }
     ns.parl.profession = (ns.parl.profession ? ns.parl.profession.replace('declare', 'déclaré').replace(/,.*$/, '') : 'Sans profession déclarée');
+
+    // Focus on the dept circonscription when selected
+    focusParlCirco(ns.parl.num_deptmt, ns.parl.num_circo);
 
     $('#name').text(ns.parl.nom);
     $('#extra').html(twitter);

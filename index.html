@@ -24,14 +24,19 @@
       </div>
     </div>
     <div id="cumul">
-      <img src="logos/cumul.png" alt="cumul" width="150"/>
+      <div id="mapcontainer">
+        <div class="map">
+          <span>Map not loaded</span>
+        </div>
+      </div>
     </div>
     <div id="widget">
       <img id="graph" src=""/>
       <img class="logo" src="logos/regardscitoyens.png"/>
     </div>
     <div id="autres"></div>
-    <button id="empty" onClick="directparl.emptyScreen()" title="Vider l'écran vert">écran vide</button><br/>
+    <button id="empty" onClick="directparl.emptyScreen()" title="Vider l'écran vert">écran vide</button>
+    <button id="resetMap" onclick="resetMap()" style="float: right">Réinitialiser la carte</button><br/>
     <div id="metasColor"><input type="text"></input></div>
     <div id="cumulColor"><input type="text"></input></div>
     <div id="widgetColor"><input type="text"></input></div>
@@ -78,5 +83,9 @@
   <script type="text/javascript" src="js/spectrum.js"></script>
   <script type="text/javascript" src="js/twitter.js"></script>
   <script type="text/javascript" src="js/directparlement.js"></script>
+  <script type="text/javascript" src="js/raphael.min.js"></script>
+  <script type="text/javascript" src="js/jquery.mapael.min.js"></script>
+  <script type="text/javascript" src="js/maps/france_circonscriptions.js"></script>
+  <script type="text/javascript" src="js/map.js"></script>
 </body>
 </html>
