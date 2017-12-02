@@ -81,6 +81,9 @@ body{
   padding-top: 47px;
   display: none;
 }
+#cumul svg {
+  margin-top: 30px;
+}
 #widget{
   clear: both;
   padding: 15px;
