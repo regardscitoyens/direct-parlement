@@ -14,7 +14,7 @@ body{
   top: 0;
   left: 646px;
 }
-#cumulColor{
+#mapColor{
   position: absolute;
   top: 0;
   left: 796px;
@@ -70,18 +70,14 @@ body{
 #descr.gouv{
   font-size: 20px;
 }
-#cumul{
+#map{
   float: right;
   width: 150px;
   height: 200px;
   border-left: 1px solid black;
   text-align: center;
 }
-#cumul img {
-  padding-top: 47px;
-  display: none;
-}
-#cumul svg {
+#map svg {
   margin-top: 30px;
 }
 #widget{

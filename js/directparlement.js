@@ -238,11 +238,12 @@
 
   ns.displayMinistre = function(){
     ns.displayMP("deputes", $('#ministre').val());
+    $('#mapcontainer').hide();
   };
 
   ns.displayMP = function(type, parlid){
     if (!parlid || (ns.parl && parlid === ns.parl.id)) return;
-    $('#cumul img').hide();
+    $('#mapcontainer').show();
     ns.parl = ns[type][parlid];
     var sexe = (ns.fonction ? ns.fonction : ns.singleParl(type, ns.sexe)),
       twitter = (ns.parl.twitter ? '@' + ns.parl.twitter : ''),
@@ -300,7 +301,6 @@
       $('#groupe img, #graph, #widget img.logo').show();
     }
     $('#text, #autres').show();
-    if (/<b>/.test(extra_mandats)) $('#cumul img').show();
   };
 
   ns.randomMP = function(type){
@@ -312,7 +312,7 @@
     ns.parl = null;
     $('#ministre').val('');
     $('#graph').attr('src', '');
-    $('#text, #autres, #groupe img, #cumul img, #graph, #widget img.logo').hide();
+    $('#text, #autres, #groupe img, #mapcontainer, #graph, #widget img.logo').hide();
   };
 
   ns.setQagMP = function(type, rowid){
@@ -514,7 +514,7 @@
   $(document).ready(function(){
     ns.spectrum("metasColor", "metas", "#00C400");
     ns.spectrum("widgetColor", "widget", "#FFFFFF");
-    ns.spectrum("cumulColor", "cumul", "#00C400");
+    ns.spectrum("mapColor", "map", "#00C400");
     ns.setResponsive();
     ns.downloadParls("deputes");
     ns.downloadParls("senateurs");
