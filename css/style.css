@@ -45,7 +45,7 @@ body{
 }
 #groupe img{
   width: 120px;
-  height: 100px;
+  height: auto;
   border: solid 1px #333;
   border-radius: 33%;
   display: none;
