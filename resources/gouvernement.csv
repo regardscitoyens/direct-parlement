@@ -2,7 +2,7 @@ nom,nom_de_famille,fonction,date_naissance,twitter
 Emmanuel Macron,Macron,Président de la République,1977-12-21,EmmanuelMacron
 Édouard Philippe,Philippe,Premier ministre,1970-11-28,EPhilippePM
 Christophe Castaner,Castaner,Ministre de l'Intérieur,1966-01-03,CCastaner
-François De Rugy,De Rugy,"Ministre d'État, Ministre de la Transition Écologique et solidaire",1973-12-06,FdeRugy
+Élisabeth Borne,Borne,"Ministre de la Transition Écologique et solidaire",1961-04-18,Elisabeth_Borne
 Nicole Belloubet,Belloubet,"Garde des Sceaux, Ministre de la Justice",1955-06-15,NBelloubet
 Jean-Yves Le Drian,Le Drian,Ministre de l'Europe et des Affaires étrangères,1947-06-30,JY_LeDrian
 Jacqueline Gourault,Gourault,Ministre de la Cohésion des territoires et des Relations avec les Collectivités Territoriales,1950-11-20,j_gourault
@@ -19,7 +19,7 @@ Annick Girardin,Girardin,Ministre des Outre-mer,1964-08-03,AnnickGirardin
 Roxana Maracineanu,Maracineanu,Ministre des Sports,1975-05-07,RoxaMaracineanu
 Amélie de Montchalin,De Montchalin,"Secrétaire d'État auprès du Ministre de l'Europe et des Affaires étrangères, chargée des Affaires européennes",1985-06-19,AdeMontchalin
 Laurent Nunez,Nunez,Secrétaire d'État auprès du Ministre de l'Intérieur,1964-02-19,NunezLaurent
-Élisabeth Borne,Borne,"Ministre déléguée auprès du Ministre de la Transition écologique et solidaire, chargée des Transports",1961-04-18,Elisabeth_Borne
+Jean-Baptiste Djebbari,"Secrétaire d'État auprès de la Ministre de la Transition écologique et solidaire, chargé des Transports",1982-02-28,Djebbari_JB
 Marc Fesneau,Fesneau,"Ministre auprès du Premier Ministre, chargé des Relations avec le Parlement",1971-01-11,MFesneau
 Sibeth NDiaye,NDiaye,"Secrétaire d'État auprès du Premier ministre, Porte-parole du gouvernement",1979-12-13,SibethNdiaye
 Marlène Schiappa,Schiappa,"Secrétaire d'État auprès du Premier ministre, chargée de l'égalité entre les femmes et les hommes et de la lutte contre les discriminations",1982-11-18,MarleneSchiappa
@@ -36,3 +36,4 @@ Emmanuelle Wargon,Wargon,"Secrétaire d'État auprès du Ministre d'État, Minis
 Christelle Dubos,Dubos,Secrétaire d'État auprès de la Ministre des Solidarités et de la Santé,1976-03-26,duboschristelle
 Gabriel Attal,Attal,Secrétaire d'État auprès du Ministre de l'Education nationale et de la Jeunesse,1989-03-16,GabrielAttal
 Adrien Taquet,Taquet,Secrétaire d'État auprès de la ministre des Solidarités et de la Santé,1977-01-03,AdrienTaquet
+Jean-Paul Delevoye,Delevoye,"Haut-commissaire aux Retraites, délégué auprès de la ministre des Solidarités et de la Santé",1947-01-22,delevoye
